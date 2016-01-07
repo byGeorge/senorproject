@@ -1,25 +1,45 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# He cambiado esto a Postgres porque Heroku me duele en los nalgas y no
+# usa SQLite. Diosa, espero que functiona...
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# Changed to Postgres because Heroku doesn't support SQLite.
 #
+
+# default: &default
+#   adapter: sqlite3
+#   pool: 5
+#   timeout: 5000
+
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  timeout: 5000
+  username: bygeorge
+  password: temp4school
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+   <<: *default
+   database: bygeorge_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
+
 test:
-  <<: *default
-  database: db/test.sqlite3
+   <<: *default
+   database: bygeorge_test
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+   <<: *default
+   database: bygeorge_production
