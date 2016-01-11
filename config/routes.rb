@@ -1,4 +1,20 @@
+# welcome/index debe ser la página de destino principal para el 
+# Generador de la APN. pages/login inicia sesión y pages/form es la forma
+# que haga las APNs.
+# welcome/index should be the main landing page for the NPC Generator.
+# pages/login is the user login and pages/form is the form that makes the 
+# NPCs.
+
 Rails.application.routes.draw do
+  get 'welcome/index'
+  root 'welcome#index'
+  get 'login' => 'pages#login'
+  get 'form' => 'pages#form'
+end
+
+# Esta es la página que va a generar los formularios.
+# This page will generate the forms
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -52,5 +68,5 @@ Rails.application.routes.draw do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
-  #   end
-end
+  # end
+
