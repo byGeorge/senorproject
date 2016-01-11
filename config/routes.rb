@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'login' => 'pages#login'
   get 'form' => 'pages#form'
+  get 'finish' => 'pages#finish'
+  get 'logged' => 'pages#logged'
+  get 'view' => 'pages#view'
+  get 'print' => 'pages#print'
 end
 
 # Esta es la página que va a generar los formularios.
