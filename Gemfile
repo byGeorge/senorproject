@@ -15,11 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Usa Postgres en lugar de SQLite
 # Uses Postgres instead of SQLite
 gem 'pg'
-
-# Se ayuda con la despligue porque Heroku no trabaja bien
-# This helps with deploying Rails because Heroku sucks
 gem 'passenger'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
