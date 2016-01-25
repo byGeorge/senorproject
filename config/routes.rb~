@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get 'view' => 'pages#view'
   get 'print' => 'pages#print'
   get 'race/list'
-  post 'form' => 'pages#finish'
 #next line is temporary until I figure out wtf I'm doing
 #proxima linea es temporaria hasta puedo entenderla
   get 'race/submit' => 'pages#finish'

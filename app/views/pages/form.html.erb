@@ -2,7 +2,8 @@
 <p>currently working on selecting race<br>
 <%= form_tag do %>
 <p><label for = "races">Race</label>:
-<%= collection_select(@races, :name, Race.all, :print_name, :print_name) %></p>
+<%= collection_select(:selected_race, :name, Race.all, :print_name, :print_name) %></p>
+<p><%= submit_tag("Create Character") %>
 <% end %>
 <p><a href="/finish"> to finished </a> <br>
 <a href="/welcome/index"> home</a> </p>
