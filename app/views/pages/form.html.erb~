@@ -2,8 +2,5 @@
 <p>someday...<br>
 <p><label for = "races">Race</label>:
 <%= collection_select(:races, :name, Race.all, :NID, prompt: true) unless !@races %></p>
-<%= Race.all.each do |names| %>
-	<option value="<% names.name %>"</option>
-<% end %>
 <p><a href="/finish"> to finished </a> <br>
 <a href="/welcome/index"> home</a> </p>

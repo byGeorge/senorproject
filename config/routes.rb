@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   get 'logged' => 'pages#logged'
   get 'view' => 'pages#view'
   get 'print' => 'pages#print'
+  get 'race/list'
+#next line is temporary until I figure out wtf I'm doing
+#proxima linea es temporaria hasta puedo entenderla
+  get 'race/submit' => 'pages#finish'
 end
-
-# Esta es la página que va a generar los formularios.
-# This page will generate the forms
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
