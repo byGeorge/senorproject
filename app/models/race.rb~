@@ -1,7 +1,8 @@
 
 class Race < ActiveRecord::Base
 	self.primary_key = "RID"
-	puts(Race.all)
-	puts("RaceModel working. I hope.") 
 	@races = Race.all
+	def print_name(object)
+		object.name
+	end
 end

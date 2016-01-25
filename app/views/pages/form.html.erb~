@@ -1,6 +1,8 @@
-<h1>Content coming!</h1>
-<p>someday...<br>
+<h1>Create a character</h1>
+<p>currently working on selecting race<br>
+<%= form_tag do %>
 <p><label for = "races">Race</label>:
-<%= collection_select(:races, :name, Race.all, :NID, prompt: true) unless !@races %></p>
+<%= collection_select(@races, :name, Race.all, :NID, :print_name) %></p>
+<% end %>
 <p><a href="/finish"> to finished </a> <br>
 <a href="/welcome/index"> home</a> </p>
