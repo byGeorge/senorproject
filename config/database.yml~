@@ -38,7 +38,7 @@ development:
 
 test:
   <<: *default
-  database: bygeorge_test
+   database: bygeorge_test
 
 #production:
 #  <<: *default
