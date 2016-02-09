@@ -2,7 +2,4 @@
 class Race < ActiveRecord::Base
 	self.primary_key = "RID"
 	@races = Race.all
-	def print_name(object)
-		object.name
-	end
 end

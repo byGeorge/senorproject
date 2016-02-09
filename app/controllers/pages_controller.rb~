@@ -1,7 +1,20 @@
 class PagesController < ApplicationController
-  def login
-  end
+	@race
 
-  def form
-  end
+	def login
+	end
+
+	def get_race
+		@race
+	end
+
+	def print_race
+		print_name(@race)
+		puts("print_race")
+	end
+
+	def post
+		puts("post")
+		@race = @race
+	end
 end
