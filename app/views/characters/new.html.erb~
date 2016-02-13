@@ -1,0 +1,8 @@
+<h1>Create a character</h1>
+<p><%= form_tag do %></p>
+<p><label for="race">Race</label>:
+<%= collection_select(:race, :pickme, Race.all, :id, :print_name) %></p>
+<p><%= submit_tag("Create Character") %>
+<% end %>
+<a href="/welcome/index"> home</a> </p>
+

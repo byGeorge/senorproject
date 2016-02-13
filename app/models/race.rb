@@ -1,8 +1,8 @@
 
 class Race < ActiveRecord::Base
 	self.primary_key = "RID"
-	@races = Race.all
-	def print_name
-		name
+
+	def self.pickme
+		return Race.find_by_name("Random")
 	end
 end

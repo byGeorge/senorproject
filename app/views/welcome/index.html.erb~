@@ -1,5 +1,5 @@
 <h1>Welcome to George Hanley's NPC Generator!</h1>
 <p>Please choose an option:
 
-<a href="/login"> log in </a>, <a href="/characters/new"> create a character </a></p>, 
+<a href="/login"> log in </a>, <a href="/form"> create a character </a></p>, 
 or <a href="/view">view</a> previously created characters.

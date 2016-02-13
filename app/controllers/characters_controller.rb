@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class CharactersController < ApplicationController
 	@race
 
 	def login
@@ -6,10 +6,6 @@ class PagesController < ApplicationController
 
 	def get_race
 		@race
-	end
-
-	def print_race
-		puts("print_race")
 	end
 
 	def post
