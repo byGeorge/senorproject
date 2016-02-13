@@ -1,0 +1,28 @@
+class AbilitiesController < CharactersController< ApplicationController
+
+	def new
+		@str = 0
+		@dex = 0
+		@con = 0
+		@int = 0
+		@wis = 0
+		@cha = 0
+	end
+
+	def generate(totpoints)
+		base = (totpoints/7).to_i
+		flux = totpoints - (base*6)
+		toAdd = [0,0,0,0,0,0]
+		while (flux > 0)
+			toAdd[blah = rand(6)]
+			flux-=1
+		end
+		@str = base + toAdd[0]
+		@dex = base + toAdd[1]
+		@con = base + toAdd[2]
+		@int = base + toAdd[3]
+		@wis = base + toAdd[4]
+		@cha = base + toAdd[5]
+	end
+end
+

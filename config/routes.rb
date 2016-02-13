@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :characters do
 	collection do
 		get 'preview'
+		resources :abilities
 	end
   end 
 end

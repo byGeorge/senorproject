@@ -21,6 +21,23 @@ class CharactersController < ApplicationController
 		if random?(@race)
 			@race = Race.where.not(rid: Race.pickme.rid).sample
 		end 
+		generate_abilities(60)
+	end
+
+	def generate_abilities(totpoints)
+		base = (totpoints/7).to_i
+		flux = totpoints - (base*6)
+		toAdd = [0,0,0,0,0,0]
+		while (flux > 0)
+			toAdd[blah = rand(6)] += 1
+			flux-=1
+		end
+		@str = 0 + base + toAdd[0]
+		@dex = 0 + base + toAdd[1]
+		@con = 0 + base + toAdd[2]
+		@int = 0 + base + toAdd[3]
+		@wis = 0 + base + toAdd[4]
+		@cha = 0 + base + toAdd[5]
 	end
 
 	def random?(obj)

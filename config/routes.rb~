@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'race/list'
   resources :characters do
-	member do
+	resources :abilities
+	collection do
 		get 'preview'
 	end
   end 
