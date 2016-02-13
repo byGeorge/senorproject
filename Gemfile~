@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Usa Postgres en lugar de SQLite
 # Uses Postgres instead of SQLite
 gem 'pg'
-gem 'pry-rails'
+gem 'pry'
 gem 'passenger'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

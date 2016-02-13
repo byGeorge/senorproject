@@ -1,5 +1,4 @@
 class CharactersController < ApplicationController
-	@race
 
 	def login
 	end
@@ -8,16 +7,25 @@ class CharactersController < ApplicationController
 		@race
 	end
 
-	def default_race_selection
-		puts()
-	end
-
 	def post
-		@race = @race
+		
 	end
 
 	def show
 		
+	end
+
+	def preview
+		race_id_temp = params[:race][:race_id].to_i
+		if random?(race_id_temp)
+			@race = Race.where.not(rid: Race.pickme.rid).sample
+		else
+			@race = Race.find_by_rid(race_id_temp)
+		end 
+	end
+
+	def random?(obj)
+		obj.name == "Random"
 	end
 
 	def finish

@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   get 'race/list'
-  resources :characters
+  resources :characters do
+	collection do
+		get 'preview'
+	end
+  end 
 end
 
   # The priority is based upon order of creation: first created -> highest priority.
