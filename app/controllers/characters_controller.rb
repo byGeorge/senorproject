@@ -44,6 +44,8 @@ class CharactersController < ApplicationController
 	def modify_by_race
 		if (@race.name == "Human")
 			@name = HumanName.choosename
+		elsif (@race.name == "Dwarf")
+			@name = DwarfName.choosename
 		end
 	end
 
