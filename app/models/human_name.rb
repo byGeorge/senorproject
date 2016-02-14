@@ -3,7 +3,7 @@ class HumanName < ActiveRecord::Base
 
 	def self.choosename
 		names = HumanName.all
-		name = names.sample.first_name + " " + names.sample.last_name
+		name = names.sample.first_name + " " + names.sample.last_name.gsub(" ", "")
 		name = name + ", \"" + names.sample.nickname + "\"" if (rand(10) == 1)
 		name
 	end
