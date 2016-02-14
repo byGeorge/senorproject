@@ -1,0 +1,2 @@
+module HumanNamesHelper
+end

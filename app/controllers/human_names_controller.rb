@@ -1,0 +1,2 @@
+class HumanNamesController < ApplicationController
+end

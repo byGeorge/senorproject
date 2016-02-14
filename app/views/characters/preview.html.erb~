@@ -1,8 +1,7 @@
 <h1>You have just created an NPC </h1>
-<p>Your character is: <%= @race.name %></p>
+<p>Your character, <%= @name %> is: <%= @race.name %></p>
 <p>Strength: <%= @str %>, Dexterity: <%= @dex %>, Constitution: <%= @con %></p>
 <p>Intelligence: <%= @int %>, Wisdom: <%= @wis %>, Charisma: <%= @cha %>
-<% binding.pry %>
 <p><a href='/welcome/index'>Go home</a> or <a href='/form'>go back.</a>
 <br>
 or you can <a href="/view">view</a> or <a href="/print">print</a> a character.
