@@ -1,0 +1,2 @@
+class ElfSyllablesController < ApplicationController
+end

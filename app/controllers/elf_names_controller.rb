@@ -1,0 +1,2 @@
+class ElfNamesController < ApplicationController
+end

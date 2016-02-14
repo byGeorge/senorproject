@@ -45,7 +45,7 @@ class CharactersController < ApplicationController
 		if (@race.name == "Human")
 			@name = HumanName.choosename
 		elsif (@race.name == "Dwarf")
-			@name = Dwarfname.choosename
+			@name = DwarfName.choosename
 		end
 	end
 
