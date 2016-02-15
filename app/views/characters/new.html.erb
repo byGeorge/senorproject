@@ -2,6 +2,14 @@
 <p><%= form_tag({controller: "characters", action: "preview"}, method: "get") do %></p>
 <p><label for="race">Race</label>:
 <%= collection_select(:race, :race_id, Race.all, :id, :name) %></p>
+<p>Gender: <br>
+<%= check_box_tag(:m) %>
+<%= label_tag(:m, "Male") %>
+<%= check_box_tag(:f) %>
+<%= label_tag(:f, "Female") %>
+<%= check_box_tag(:n) %>
+<%= label_tag(:n, "Who needs gender?") %>
+</p>
 <p><%= submit_tag("Create Character") %>
 <% end %>
 <a href="/welcome/index"> home</a> </p>
