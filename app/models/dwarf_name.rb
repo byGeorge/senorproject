@@ -3,7 +3,6 @@ class DwarfName < ActiveRecord::Base
 
 	def self.choosename
 		names = DwarfName.all
-		lname = names.sample.name + names.sample.name.downcase
-		name = names.sample.name + lname.gsub(" ", "")
+		name = names.sample.fname + names.sample.clan_name
 	end
 end
