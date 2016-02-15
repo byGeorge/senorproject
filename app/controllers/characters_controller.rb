@@ -17,6 +17,9 @@ class CharactersController < ApplicationController
 
 	def preview
 		race_id_temp = params[:race][:race_id].to_i
+		@m = params[:m]
+		@f = params[:f]
+		@n = params[:n]
 		@race = Race.find_by_rid(race_id_temp)
 		if random?(@race)
 			@race = Race.where.not(rid: Race.pickme.rid).sample
@@ -43,9 +46,10 @@ class CharactersController < ApplicationController
 
 	def modify_by_race
 		if (@race.name == "Human")
-			@name = HumanName.choosename
+			@name = HumanName.choosename(@m, @f, @n)
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename
+			@con += 2
  		elsif (@race.name == "Elf")
 			@name = ElfName.choosename
 		end
