@@ -10,6 +10,9 @@
 <%= check_box_tag(:n) %>
 <%= label_tag(:n, "Aren't we past all that gender nonsense?") %>
 </p>
+<p><label for="cclass">Class</label>:
+<%= collection_select(:c_class, :class_id, CClass.all, :id, :class_name) %></p>
+</p>
 <p><%= submit_tag("Create Character") %>
 <% end %>
 <a href="/welcome/index"> home</a> </p>

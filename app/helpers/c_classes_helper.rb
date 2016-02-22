@@ -1,0 +1,2 @@
+module CClassesHelper
+end

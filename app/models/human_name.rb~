@@ -16,7 +16,6 @@ class HumanName < ActiveRecord::Base
 			list = names
 		else
 			names.each do |name|
-				binding.pry
 				marker = name.gender
 				list.push name if (m && marker == 'm')
 				list.push name if (f && marker == 'f')

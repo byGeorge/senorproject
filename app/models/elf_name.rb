@@ -1,5 +1,4 @@
 class ElfName < ActiveRecord::Base
-	self.primary_key = "nid"
 
 	def self.choosename
 		names = ElfName.all

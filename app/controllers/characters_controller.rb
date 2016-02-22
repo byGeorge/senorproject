@@ -20,9 +20,9 @@ class CharactersController < ApplicationController
 		@m = params[:m]
 		@f = params[:f]
 		@n = params[:n]
-		@race = Race.find_by_rid(race_id_temp)
+		@race = Race.find_by_id(race_id_temp)
 		if random?(@race)
-			@race = Race.where.not(rid: Race.pickme.rid).sample
+			@race = Race.where.not(id: Race.pickme.id).sample
 		end
 		@lvl = 1 
 		modify_by_class(generate_abilities(@lvl))

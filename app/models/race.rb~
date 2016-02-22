@@ -1,8 +1,10 @@
-
 class Race < ActiveRecord::Base
-	self.primary_key = "rid"
+
+	def find_by_id(id)
+		super
+	end
 
 	def self.pickme
-		return Race.find_by_name("Random")
+		Race.find_by_name("Random")
 	end
 end
