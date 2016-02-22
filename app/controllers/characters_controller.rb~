@@ -169,18 +169,35 @@ class CharactersController < ApplicationController
 			@con = stat[1]
 			@wis = stat[2]
 		elsif @c_class.name == "Sorcerer"
-
-		elsif @c_class.name == "Warlock"
-
-		elsif @c_class.name == "Wizard"
-
-		else
-	 		@str = stat[0]
-			@dex = stat[1]
-			@con = stat[2]
-			@int = stat[3]
-			@wis = stat[4]
 			@cha = stat[5]
+			@con = stat[4]
+			stat.delete_at(5)
+			stat.delete_at(4)
+			stat.shuffle!
+			@dex = stat[0]
+			@int = stat[1]
+			@wis = stat[2]
+			@str = stat[3]
+		elsif @c_class.name == "Warlock"
+			@cha = stat[5]
+			@con = stat[4]
+			stat.delete_at(5)
+			stat.delete_at(4)
+			stat.shuffle!
+			@dex = stat[0]
+			@int = stat[1]
+			@wis = stat[2]
+			@str = stat[3]
+		elsif @c_class.name == "Wizard"
+			@int = stat[5]
+			@str = stat[0]
+			stat.delete_at(5)
+			stat.delete_at(0)
+			stat.shuffle!
+			@dex = stat[0]
+			@con = stat[1]
+			@wis = stat[2]
+			@cha = stat[3]
 		end
 		stat
 	end
