@@ -9,10 +9,14 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   get 'race/list'
+  resources :login do
+	collection do
+		get 'logged'
+	end
+  end
   resources :characters do
 	collection do
 		get 'preview'
-		resources :abilities
 	end
   end 
 end

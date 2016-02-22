@@ -20,7 +20,6 @@ class CharactersController < ApplicationController
 		@m = params[:m]
 		@f = params[:f]
 		@n = params[:n]
-		binding.pry
 		@race = Race.find_by_rid(race_id_temp)
 		if random?(@race)
 			@race = Race.where.not(rid: Race.pickme.rid).sample
