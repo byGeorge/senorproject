@@ -1,7 +1,26 @@
 <h1><%= @name %> </h1>
-<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class %></p>
+<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
 <p>Strength: <%= @str %>, Dexterity: <%= @dex %>, Constitution: <%= @con %></p>
 <p>Intelligence: <%= @int %>, Wisdom: <%= @wis %>, Charisma: <%= @cha %>
+<p>Skills: <br>
+Acrobatics: <%= @acrobatics %><br>
+Animal Handling: <%= @animal_h %><br>
+Arcana: <%= @arcana %><br>
+Athletics: <%= @athletics %><br>
+Deception: <%= @deception %><br>
+History: <%= @history %><br>
+Insight: <%= @insight %><br>
+Intimidation: <%= @intimidation %><br>
+Investigation: <%= @investigation %><br>
+Medicine: <%= @medicine %><br>
+Nature: <%= @nature %><br>
+Perception: <%= @perception %><br>
+Performance: <%= @performance %><br>
+Persuasion: <%= @persuasion %><br>
+Religion: <%= @religion %><br>
+Sleight of Hand: <%= @sleight_o_hand %><br>
+Stealth: <%= @stealth %><br>
+Survival: <%= @survival %><br>
 <p><a href='/welcome/index'>Go home</a> or <a href='/form'>go back.</a>
 <br>
 or you can <a href="/view">view</a> or <a href="/print">print</a> a character.

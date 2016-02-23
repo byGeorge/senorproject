@@ -35,6 +35,7 @@ class CharactersController < ApplicationController
 		@lvl = 1 
 		abl_modify_by_class(generate_abilities(@lvl))
 		modify_by_race
+		generate_skills(@lvl)
 	end
 
 	#generates ability scores based on level, and returns a range of stats
@@ -57,7 +58,123 @@ class CharactersController < ApplicationController
 		stat.sort!
 	end
 
-	#must be called after modify_by_class or it won't work
+	#generates skill scores. Method must be run after abl_modify_by_class
+	#because it needs ability stats to work
+	#skill = skill level + ability mod (ability -10, then divided by two)
+	#negative skills are possible. A negative score in, say, deception means
+	#that the person is a very bad liar.
+	def generate_skills(lvl)
+		if @c_class.name == "Barbarian"
+			#favoured skills are animal handling, athletics,
+			#intimidation, nature, perception, and survival
+			skills = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(0..5)] += 1
+			#ranks in skill cannot exceed level
+			temp = 0 #frustrating that it won't set a random unless initialized
+			temp = rand(0..5) until skills[temp] == 0
+			skills[temp] += 1
+			
+			#calculate skills; first six slots are given to favoured skills
+			@acrobatics = skills[6] + (@dex - 10)/2 
+			@arcana = skills[7] + (@int - 10)/2 
+			@animal_h = skills[0] + (@wis - 10)/2
+			@athletics = skills[1] + (@str - 10)/2 
+			@deception = skills[8] + (@cha - 10)/2 
+			@history = skills[9] + (@int - 10)/2 
+			@insight = skills[10] + (@wis - 10)/2 
+			@intimidation = skills[2] + (@cha - 10)/2
+			@investigation = skills[11] + (@int - 10)/2 
+			@medicine = skills[12] + (@wis - 10)/2 
+			@nature = skills[3] + (@int - 10)/2
+			@perception = skills[4] + (@wis - 10)/2 
+			@performance = skills[14] + (@cha - 10)/2 
+			@persuasion = skills[15] + (@cha - 10)/2 
+			@religion = skills[16] + (@int - 10)/2 
+			@sleight_o_hand = skills[17] + (@dex - 10)/2 
+			@stealth = skills[13] + (@wis - 10)/2 
+			@survival = skills[5] + (@wis - 10)/2 
+		elsif @c_class.name == "Bard"
+			#one point goes to performance, the other to
+			#history, persuasion, sleight of hand, acrobatics, or religion
+			skills = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(1..5)] += 1
+			
+			#calculate skills; first six slots are given to favoured skills
+			@acrobatics = skills[5] + (@dex - 10)/2 
+			@arcana = skills[7] + (@int - 10)/2 
+			@animal_h = skills[8] + (@wis - 10)/2
+			@athletics = skills[9] + (@str - 10)/2 
+			@deception = skills[10] + (@cha - 10)/2 
+			@history = skills[5] + (@int - 10)/2 
+			@insight = skills[11] + (@wis - 10)/2 
+			@intimidation = skills[12] + (@cha - 10)/2
+			@investigation = skills[13] + (@int - 10)/2 
+			@medicine = skills[14] + (@wis - 10)/2 
+			@nature = skills[15] + (@int - 10)/2
+			@perception = skills[16] + (@wis - 10)/2 
+			@performance = skills[0] + (@cha - 10)/2 
+			@persuasion = skills[4] + (@cha - 10)/2 
+			@religion = skills[3] + (@int - 10)/2 
+			@sleight_o_hand = skills[2] + (@dex - 10)/2 
+			@stealth = skills[6] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Cleric"
+			#one point goes to medicine, the other to religion
+			#history, persuasion, sleight of hand, acrobatics, or religion
+			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			
+			#calculate skills; first six slots are given to favoured skills
+			@acrobatics = skills[2] + (@dex - 10)/2 
+			@arcana = skills[3] + (@int - 10)/2 
+			@animal_h = skills[4] + (@wis - 10)/2
+			@athletics = skills[5] + (@str - 10)/2 
+			@deception = skills[6] + (@cha - 10)/2 
+			@history = skills[7] + (@int - 10)/2 
+			@insight = skills[8] + (@wis - 10)/2 
+			@intimidation = skills[9] + (@cha - 10)/2
+			@investigation = skills[10] + (@int - 10)/2 
+			@medicine = skills[0] + (@wis - 10)/2 
+			@nature = skills[11] + (@int - 10)/2
+			@perception = skills[12] + (@wis - 10)/2 
+			@performance = skills[13] + (@cha - 10)/2 
+			@persuasion = skills[14] + (@cha - 10)/2 
+			@religion = skills[1] + (@int - 10)/2 
+			@sleight_o_hand = skills[15] + (@dex - 10)/2 
+			@stealth = skills[16] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Druid"
+			#favoured skills are animal handling, medicine,
+			#nature, perception, and survival
+			skills = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(0..4)] += 1
+			#ranks in skill cannot exceed level
+			temp = 0 #frustrating that it won't set a random unless initialized
+			temp = rand(0..4) until skills[temp] == 0
+			skills[temp] += 1
+			
+			#calculate skills; first six slots are given to favoured skills
+			@acrobatics = skills[5] + (@dex - 10)/2 
+			@arcana = skills[6] + (@int - 10)/2 
+			@animal_h = skills[0] + (@wis - 10)/2
+			@athletics = skills[7] + (@str - 10)/2 
+			@deception = skills[8] + (@cha - 10)/2 
+			@history = skills[9] + (@int - 10)/2 
+			@insight = skills[10] + (@wis - 10)/2 
+			@intimidation = skills[11] + (@cha - 10)/2
+			@investigation = skills[12] + (@int - 10)/2 
+			@medicine = skills[1] + (@wis - 10)/2 
+			@nature = skills[2] + (@int - 10)/2
+			@perception = skills[3] + (@wis - 10)/2 
+			@performance = skills[13] + (@cha - 10)/2 
+			@persuasion = skills[14] + (@cha - 10)/2 
+			@religion = skills[15] + (@int - 10)/2 
+			@sleight_o_hand = skills[16] + (@dex - 10)/2 
+			@stealth = skills[17] + (@wis - 10)/2 
+			@survival = skills[4] + (@wis - 10)/2
+		end
+	end
+
+	#must be called after abl_modify_by_class or it won't work
 	#because the stats haven't been initialized
 	#changes NPC according to racial abilities
 	def modify_by_race
