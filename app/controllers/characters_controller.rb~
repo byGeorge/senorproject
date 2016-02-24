@@ -66,7 +66,7 @@ class CharactersController < ApplicationController
 	def generate_skills(lvl)
 		if @c_class.name == "Barbarian"
 			#favoured skills are animal handling, athletics,
-			#intimidation, anture, perception, and survival
+			#intimidation, nature, perception, and survival
 			skills = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			skills[rand(0..5)] += 1
 			#ranks in skill cannot exceed level
@@ -74,7 +74,7 @@ class CharactersController < ApplicationController
 			temp = rand(0..5) until skills[temp] == 0
 			skills[temp] += 1
 			
-			#calculate skills; first six slots are given to favoured skills
+			#calculate skills; first slots are given to favoured skills
 			@acrobatics = skills[6] + (@dex - 10)/2 
 			@arcana = skills[7] + (@int - 10)/2 
 			@animal_h = skills[0] + (@wis - 10)/2
@@ -99,7 +99,7 @@ class CharactersController < ApplicationController
 			skills = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			skills[rand(1..5)] += 1
 			
-			#calculate skills; first six slots are given to favoured skills
+			#calculate skills; first slots are given to favoured skills
 			@acrobatics = skills[5] + (@dex - 10)/2 
 			@arcana = skills[7] + (@int - 10)/2 
 			@animal_h = skills[8] + (@wis - 10)/2
@@ -123,7 +123,7 @@ class CharactersController < ApplicationController
 			#history, persuasion, sleight of hand, acrobatics, or religion
 			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			
-			#calculate skills; first six slots are given to favoured skills
+			#calculate skills; first slots are given to favoured skills
 			@acrobatics = skills[2] + (@dex - 10)/2 
 			@arcana = skills[3] + (@int - 10)/2 
 			@animal_h = skills[4] + (@wis - 10)/2
@@ -142,6 +142,184 @@ class CharactersController < ApplicationController
 			@sleight_o_hand = skills[15] + (@dex - 10)/2 
 			@stealth = skills[16] + (@wis - 10)/2 
 			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Druid"
+			#favoured skills are animal handling, medicine,
+			#nature, perception, and survival
+			skills = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(0..4)] += 1
+			#ranks in skill cannot exceed level
+			temp = 0 #frustrating that it won't set a random unless initialized
+			temp = rand(0..4) until skills[temp] == 0
+			skills[temp] += 1
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[5] + (@dex - 10)/2 
+			@arcana = skills[6] + (@int - 10)/2 
+			@animal_h = skills[0] + (@wis - 10)/2
+			@athletics = skills[7] + (@str - 10)/2 
+			@deception = skills[8] + (@cha - 10)/2 
+			@history = skills[9] + (@int - 10)/2 
+			@insight = skills[10] + (@wis - 10)/2 
+			@intimidation = skills[11] + (@cha - 10)/2
+			@investigation = skills[12] + (@int - 10)/2 
+			@medicine = skills[1] + (@wis - 10)/2 
+			@nature = skills[2] + (@int - 10)/2
+			@perception = skills[3] + (@wis - 10)/2 
+			@performance = skills[13] + (@cha - 10)/2 
+			@persuasion = skills[14] + (@cha - 10)/2 
+			@religion = skills[15] + (@int - 10)/2 
+			@sleight_o_hand = skills[16] + (@dex - 10)/2 
+			@stealth = skills[17] + (@wis - 10)/2 
+			@survival = skills[4] + (@wis - 10)/2
+		elsif @c_class.name == "Fighter"
+			#favored skill is athletics. 
+			skills = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(1..17)] += 1
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[1] + (@dex - 10)/2 
+			@arcana = skills[2] + (@int - 10)/2 
+			@animal_h = skills[3] + (@wis - 10)/2
+			@athletics = skills[0] + (@str - 10)/2 
+			@deception = skills[4] + (@cha - 10)/2 
+			@history = skills[5] + (@int - 10)/2 
+			@insight = skills[6] + (@wis - 10)/2 
+			@intimidation = skills[7] + (@cha - 10)/2
+			@investigation = skills[8] + (@int - 10)/2 
+			@medicine = skills[9] + (@wis - 10)/2 
+			@nature = skills[10] + (@int - 10)/2
+			@perception = skills[11] + (@wis - 10)/2 
+			@performance = skills[12] + (@cha - 10)/2 
+			@persuasion = skills[13] + (@cha - 10)/2 
+			@religion = skills[14] + (@int - 10)/2 
+			@sleight_o_hand = skills[15] + (@dex - 10)/2 
+			@stealth = skills[16] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Monk"
+			#favoured skills are acrobatics and athletics 
+			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			
+			#calculate skills; first slots are given to favoured skills
+			binding.pry
+			@acrobatics = skills[0] + (@dex - 10)/2 
+			@arcana = skills[2] + (@int - 10)/2 
+			@animal_h = skills[3] + (@wis - 10)/2
+			@athletics = skills[1] + (@str - 10)/2 
+			@deception = skills[4] + (@cha - 10)/2 
+			@history = skills[5] + (@int - 10)/2 
+			@insight = skills[6] + (@wis - 10)/2 
+			@intimidation = skills[7] + (@cha - 10)/2
+			@investigation = skills[8] + (@int - 10)/2 
+			@medicine = skills[9] + (@wis - 10)/2 
+			@nature = skills[10] + (@int - 10)/2
+			@perception = skills[11] + (@wis - 10)/2 
+			@performance = skills[12] + (@cha - 10)/2 
+			@persuasion = skills[13] + (@cha - 10)/2 
+			@religion = skills[14] + (@int - 10)/2 
+			@sleight_o_hand = skills[15] + (@dex - 10)/2 
+			@stealth = skills[16] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Paladin"
+			#favoured skills are intimidation and athletics
+			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[2] + (@dex - 10)/2 
+			@arcana = skills[3] + (@int - 10)/2 
+			@animal_h = skills[4] + (@wis - 10)/2
+			@athletics = skills[1] + (@str - 10)/2 
+			@deception = skills[5] + (@cha - 10)/2 
+			@history = skills[6] + (@int - 10)/2 
+			@insight = skills[7] + (@wis - 10)/2 
+			@intimidation = skills[0] + (@cha - 10)/2
+			@investigation = skills[8] + (@int - 10)/2 
+			@medicine = skills[9] + (@wis - 10)/2 
+			@nature = skills[10] + (@int - 10)/2
+			@perception = skills[11] + (@wis - 10)/2 
+			@performance = skills[12] + (@cha - 10)/2 
+			@persuasion = skills[13] + (@cha - 10)/2 
+			@religion = skills[14] + (@int - 10)/2 
+			@sleight_o_hand = skills[15] + (@dex - 10)/2 
+			@stealth = skills[16] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Ranger"
+			#favoured skills are nature ad survival
+			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[2] + (@dex - 10)/2 
+			@arcana = skills[3] + (@int - 10)/2 
+			@animal_h = skills[4] + (@wis - 10)/2
+			@athletics = skills[5] + (@str - 10)/2 
+			@deception = skills[6] + (@cha - 10)/2 
+			@history = skills[7] + (@int - 10)/2 
+			@insight = skills[8] + (@wis - 10)/2 
+			@intimidation = skills[9] + (@cha - 10)/2
+			@investigation = skills[10] + (@int - 10)/2 
+			@medicine = skills[11] + (@wis - 10)/2 
+			@nature = skills[0] + (@int - 10)/2
+			@perception = skills[12] + (@wis - 10)/2 
+			@performance = skills[13] + (@cha - 10)/2 
+			@persuasion = skills[14] + (@cha - 10)/2 
+			@religion = skills[15] + (@int - 10)/2 
+			@sleight_o_hand = skills[16] + (@dex - 10)/2 
+			@stealth = skills[17] + (@wis - 10)/2 
+			@survival = skills[1] + (@wis - 10)/2
+		elsif @c_class.name == "Rogue"
+			#favoured skills are deception, perception, 
+			#stealth, and sleight of hand
+			skills = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(0..3)] += 1
+			#ranks in skill cannot exceed level
+			temp = 0 #frustrating that it won't set a random unless initialized
+			temp = rand(0..3) until skills[temp] == 0
+			skills[temp] += 1
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[4] + (@dex - 10)/2 
+			@arcana = skills[5] + (@int - 10)/2 
+			@animal_h = skills[6] + (@wis - 10)/2
+			@athletics = skills[7] + (@str - 10)/2 
+			@deception = skills[0] + (@cha - 10)/2 
+			@history = skills[8] + (@int - 10)/2 
+			@insight = skills[9] + (@wis - 10)/2 
+			@intimidation = skills[10] + (@cha - 10)/2
+			@investigation = skills[11] + (@int - 10)/2 
+			@medicine = skills[12] + (@wis - 10)/2 
+			@nature = skills[13] + (@int - 10)/2
+			@perception = skills[1] + (@wis - 10)/2 
+			@performance = skills[14] + (@cha - 10)/2 
+			@persuasion = skills[15] + (@cha - 10)/2 
+			@religion = skills[16] + (@int - 10)/2 
+			@sleight_o_hand = skills[2] + (@dex - 10)/2 
+			@stealth = skills[3] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+		elsif @c_class.name == "Sorcerer" || "Warlock" || "Wizard"
+			#favoured skill is knowledge arcana 
+			#other knowledge skills come next
+			skills = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			skills[rand(1..4)] += 1
+			
+			#calculate skills; first slots are given to favoured skills
+			@acrobatics = skills[5] + (@dex - 10)/2 
+			@arcana = skills[0] + (@int - 10)/2 
+			@animal_h = skills[6] + (@wis - 10)/2
+			@athletics = skills[7] + (@str - 10)/2 
+			@deception = skills[8] + (@cha - 10)/2 
+			@history = skills[4] + (@int - 10)/2 
+			@insight = skills[9] + (@wis - 10)/2 
+			@intimidation = skills[10] + (@cha - 10)/2
+			@investigation = skills[11] + (@int - 10)/2 
+			@medicine = skills[3] + (@wis - 10)/2 
+			@nature = skills[2] + (@int - 10)/2
+			@perception = skills[12] + (@wis - 10)/2 
+			@performance = skills[13] + (@cha - 10)/2 
+			@persuasion = skills[14] + (@cha - 10)/2 
+			@religion = skills[1] + (@int - 10)/2 
+			@sleight_o_hand = skills[15] + (@dex - 10)/2 
+			@stealth = skills[16] + (@wis - 10)/2 
+			@survival = skills[17] + (@wis - 10)/2
+
 		end
 	end
 
