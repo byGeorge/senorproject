@@ -27,10 +27,10 @@ class CharactersController < ApplicationController
 		@c_class = CClass.find_by_id(c_class_id_temp)
 		#picking a random race/class/etc if the user selected Random
 		if random?(@race)
-			@race = Race.where.not(id: Race.pickme.id).sample
+			@race = Race.all.sample
 		end
 		if random?(@c_class)
-			@c_class = CClass.where.not(id: CClass.pickme.id).sample
+			@c_class = CClass.all.sample
 		end
 		@lvl = 1 
 		abl_modify_by_class(generate_abilities(@lvl))
@@ -200,7 +200,6 @@ class CharactersController < ApplicationController
 			skills = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 			
 			#calculate skills; first slots are given to favoured skills
-			binding.pry
 			@acrobatics = skills[0] + (@dex - 10)/2 
 			@arcana = skills[2] + (@int - 10)/2 
 			@animal_h = skills[3] + (@wis - 10)/2
@@ -335,12 +334,16 @@ class CharactersController < ApplicationController
 			@int += 1
 			@wis += 1
 			@cha += 1
+		#for the moment, there is only Mountain Dwarf. Love Mountain Dwarf
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename(@m, @f, @n)
 			@con += 2
+			@str += 2
+		#high elf
  		elsif (@race.name == "Elf")
 			@name = ElfName.choosename
 			@dex += 2
+			@int += 1
 		end
 	end
 
@@ -475,7 +478,7 @@ class CharactersController < ApplicationController
 	end
 
 	def random?(obj)
-		obj.name == "Random"
+		obj == "Random" || obj == nil
 	end
 
 	def finish

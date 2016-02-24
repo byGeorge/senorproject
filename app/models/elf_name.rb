@@ -4,7 +4,7 @@ class ElfName < ActiveRecord::Base
 		names = ElfName.all
 		syll = ElfSyllable.all
 		fname = syll.sample.syllable.capitalize
-		for i in 1..(rand(3))
+		for i in 1..(rand(3)+1)
 			fname = fname + syll.sample.syllable
 		end
 		name =  fname + " " + names.sample.name

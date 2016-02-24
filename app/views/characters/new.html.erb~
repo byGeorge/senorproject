@@ -8,10 +8,11 @@
 <%= check_box_tag(:f) %>
 <%= label_tag(:f, "Female") %>
 <%= check_box_tag(:n) %>
-<%= label_tag(:n, "Aren't we past all that gender nonsense?") %>
-</p>
+<%= label_tag(:n, "Aren't we past all that gender nonsense?") %></p>
+<p><%= label_tag(:lvl, "Level:") %>
+<%= select_tag(:lvl, options_for_select(0..20), {prompt: "Random"}) %></p>
 <p><label for="c_class">Class</label>:
-<%= collection_select(:c_class, :class_id, CClass.all, :id, :class_name) %></p>
+<%= collection_select(:c_class, :class_id, CClass.all, :id, :name) %></p>
 </p>
 <p><%= submit_tag("Create Character") %>
 <% end %>

@@ -1,17 +1,18 @@
 <h1>Create a character</h1>
 <p><%= form_tag({controller: "characters", action: "preview"}, method: "get") do %></p>
 <p><label for="race">Race</label>:
-<%= collection_select(:race, :race_id, Race.all, :id, :name) %></p>
+<%= collection_select(:race, :race_id, Race.all, :id, :name, {prompt: "Random"}) %></p>
 <p>Gender: <br>
 <%= check_box_tag(:m) %>
 <%= label_tag(:m, "Male") %>
 <%= check_box_tag(:f) %>
 <%= label_tag(:f, "Female") %>
 <%= check_box_tag(:n) %>
-<%= label_tag(:n, "Aren't we past all that gender nonsense?") %>
-</p>
+<%= label_tag(:n, "Aren't we past all that gender nonsense?") %></p>
+<p><%= label_tag(:lvl, "Level:") %>
+<%= select_tag(:lvl, options_for_select(0..20), {prompt: "Random"}) %></p>
 <p><label for="c_class">Class</label>:
-<%= collection_select(:c_class, :class_id, CClass.all, :id, :name) %></p>
+<%= collection_select(:c_class, :class_id, CClass.all, :id, :name, {prompt: "Random"}) %></p>
 </p>
 <p><%= submit_tag("Create Character") %>
 <% end %>
