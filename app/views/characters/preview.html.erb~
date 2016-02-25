@@ -1,7 +1,11 @@
 <h1><%= @name %> </h1>
 <p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
-<p>Strength: <%= @str %>, Dexterity: <%= @dex %>, Constitution: <%= @con %></p>
-<p>Intelligence: <%= @int %>, Wisdom: <%= @wis %>, Charisma: <%= @cha %>
+<p>Strength: <%= @str %><br>
+Dexterity: <%= @dex %><br>
+Constitution: <%= @con %><br>
+Intelligence: <%= @int %><br>
+Wisdom: <%= @wis %><br>
+Charisma: <%= @cha %></p>
 <p>Skills: <br>
 Acrobatics: <%= @acrobatics %><br>
 Animal Handling: <%= @animal_h %><br>
