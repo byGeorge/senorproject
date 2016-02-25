@@ -1,43 +1,4 @@
 class CharactersController < ApplicationController
-
-	def login
-	end
-
-	def get_race
-		@race
-	end
-
-	def post
-		
-	end
-
-	def show
-		
-	end
-
-	def preview
-		#getting params from form entries
-		race_id_temp = params[:race][:race_id].to_i
-		c_class_id_temp = params[:c_class][:class_id].to_i
-		@m = params[:m]
-		@f = params[:f]
-		@n = params[:n]
-		#turning the form object into a successful database query
-		@race = Race.find_by_id(race_id_temp)
-		@c_class = CClass.find_by_id(c_class_id_temp)
-		#picking a random race/class/etc if the user selected Random
-		if random?(@race)
-			@race = Race.all.sample
-		end
-		if random?(@c_class)
-			@c_class = CClass.all.sample
-		end
-		@lvl = 1 
-		abl_modify_by_class(generate_abilities(@lvl))
-		modify_by_race
-		generate_skills(@lvl)
-	end
-
 	#generates ability scores based on level, and returns a range of stats
 	#that will later be modified by class (with modify_by_class(stats[]))
 	#stats arranged from lowest to highest number
@@ -55,6 +16,7 @@ class CharactersController < ApplicationController
 			#takes the highest three
 			stat[i] = d[1] + d[2] + d[3]
 		end
+		#then sorts the array so that modify_by_class places stats appropriately
 		stat.sort!
 	end
 
@@ -178,35 +140,11 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@religion += skills[3]
 		end
-	end
+	end # end generate_skills
 
-	#must be called after abl_modify_by_class or it won't work
-	#because the stats haven't been initialized
-	#changes NPC according to racial abilities
-	def modify_by_race
-		if (@race.name == "Human")
-			@name = HumanName.choosename(@m, @f, @n)
-			@str += 1
-			@dex += 1
-			@con += 1
-			@int += 1
-			@wis += 1
-			@cha += 1
-		#for the moment, there is only Mountain Dwarf. Love Mountain Dwarf
-		elsif (@race.name == "Dwarf")
-			@name = DwarfName.choosename(@m, @f, @n)
-			@con += 2
-			@str += 2
-		#high elf
- 		elsif (@race.name == "Elf")
-			@name = ElfName.choosename
-			@dex += 2
-			@int += 1
-		end
-	end
 
 	#initializes and modifies abilities
-	def abl_modify_by_class(stat)
+	def modify_by_class(stat)
 		if @c_class.name == "Barbarian"
 			@str = stat[5]
 			@con = stat[4]
@@ -323,7 +261,7 @@ class CharactersController < ApplicationController
 			@str = stat[3]
 		elsif @c_class.name == "Wizard"
 			@int = stat[5]
-			@str = stat[0]
+			@str = stat[0] #wiz don't need no strength
 			stat.delete_at(5)
 			stat.delete_at(0)
 			stat.shuffle!
@@ -332,14 +270,58 @@ class CharactersController < ApplicationController
 			@wis = stat[2]
 			@cha = stat[3]
 		end
-		stat
+		stat #return statement
+	end #end modify by class
+
+	#must be called after abl_modify_by_class or it won't work
+	#because the stats haven't been initialized
+	#changes NPC according to racial abilities
+	def modify_by_race
+		if (@race.name == "Human")
+			@name = HumanName.choosename(@m, @f, @n)
+			@str += 1
+			@dex += 1
+			@con += 1
+			@int += 1
+			@wis += 1
+			@cha += 1
+		#for the moment, there is only Mountain Dwarf. Love Mountain Dwarf
+		elsif (@race.name == "Dwarf")
+			@name = DwarfName.choosename(@m, @f, @n)
+			@con += 2
+			@str += 2
+		#high elf
+ 		elsif (@race.name == "Elf")
+			@name = ElfName.choosename
+			@dex += 2
+			@int += 1
+		end
+	end
+
+	def preview
+		#getting params from form entries
+		race_id_temp = params[:race][:race_id].to_i
+		c_class_id_temp = params[:c_class][:class_id].to_i
+		@m = params[:m]
+		@f = params[:f]
+		@n = params[:n]
+		#turning the form object into a successful database query
+		@race = Race.find_by_id(race_id_temp)
+		@c_class = CClass.find_by_id(c_class_id_temp)
+		#picking a random race/class/etc if the user selected Random
+		if random?(@race)
+			@race = Race.all.sample
+		end
+		if random?(@c_class)
+			@c_class = CClass.all.sample
+		end
+		@lvl = 1 
+		abl_modify_by_class(generate_abilities(@lvl))
+		modify_by_race
+		generate_skills(@lvl)
 	end
 
 	def random?(obj)
 		obj == "Random" || obj == nil
-	end
-
-	def finish
-		
 	end
 end
