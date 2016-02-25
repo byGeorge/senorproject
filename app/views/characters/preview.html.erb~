@@ -1,5 +1,11 @@
 <h1><%= @name %> </h1>
 <p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
+<p>Hit points: <%= @hp %><br>
+Weapon Proficiency <%= @wpn_prof %></p>
+<% if @c_class.name == "Barbarian" %>
+<p id="barbtxt">Rages: <%= @rage %><br>
+Rage Damage Bonus: <%= @rage_damage %></p>
+<% end %>
 <p>Strength: <%= @str %><br>
 Dexterity: <%= @dex %><br>
 Constitution: <%= @con %><br>
@@ -25,7 +31,7 @@ Religion: <%= @religion %><br>
 Sleight of Hand: <%= @sleight_o_hand %><br>
 Stealth: <%= @stealth %><br>
 Survival: <%= @survival %><br>
-<p><a href='/welcome/index'>Go home</a> or <a href='/form'>go back.</a>
+<p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
 <br>
 or you can <a href="/view">view</a> or <a href="/print">print</a> a character.
 </p>

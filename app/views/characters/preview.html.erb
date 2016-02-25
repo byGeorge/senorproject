@@ -1,5 +1,11 @@
 <h1><%= @name %> </h1>
 <p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
+<p>Hit points: <%= @hp %><br>
+Weapon Proficiency <%= @wpn_prof %></p>
+<% if @c_class.name == "Barbarian" %>
+<p id="barbtxt">Rages: <%= @rage %><br>
+Rage Damage Bonus: <%= @rage_dmg %></p>
+<% end %>
 <p>Strength: <%= @str %><br>
 Dexterity: <%= @dex %><br>
 Constitution: <%= @con %><br>

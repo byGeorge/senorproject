@@ -1,4 +1,5 @@
 class CharactersController < ApplicationController
+
 	#generates ability scores based on level, and returns a range of stats
 	#that will later be modified by class (with modify_by_class(stats[]))
 	#stats arranged from lowest to highest number
@@ -61,6 +62,12 @@ class CharactersController < ApplicationController
 			@nature += skills[3]
 			@perception += skills[4]
 			@survival += skills[5]
+			#special skills
+			@rage = 2
+			@rage_dmg = 2
+			#weapons proficiency bonus
+			@wpn_prof = 2
+			for i in 2..@lvl do level_up(i) end
 		elsif @c_class.name == "Bard"
 			#one point goes to performance, the other to
 			#history, persuasion, sleight of hand, acrobatics, or religion
@@ -142,6 +149,41 @@ class CharactersController < ApplicationController
 		end
 	end # end generate_skills
 
+	def level_up(lvl)
+		if @c_class.name == "Barbarian"
+			@hp += 7
+			#every third level, barbarian can rage one more time
+			@rage += 1 if lvl % 3 == 0
+			@rage = "unlimited" if lvl == 20
+			#rage gives a bigger damage boost at 9th and 16th levels
+			@rage_dmg += 1 if lvl == 9 || lvl == 16
+			#better at weapons at 5th, 9th, 13th, and 17th levels
+			@wpn_prof += 1 if lvl % 4 == 1
+		elsif @c_class.name == "Bard"
+
+		elsif @c_class.name == "Cleric"
+
+		elsif @c_class.name == "Druid"
+
+		elsif @c_class.name == "Fighter"
+
+		elsif @c_class.name == "Monk"
+
+		elsif @c_class.name == "Paladin"
+
+		elsif @c_class.name == "Ranger"
+
+		elsif @c_class.name == "Rogue"
+
+		elsif @c_class.name == "Sorcerer"
+
+		elsif @c_class.name == "Warlock"
+
+		elsif @c_class.name == "Wizard"
+
+		end
+	end
+
 
 	#initializes and modifies abilities
 	def modify_by_class(stat)
@@ -155,6 +197,8 @@ class CharactersController < ApplicationController
 			@int = stat[1]
 			@wis = stat[2]
 			@cha = stat[3]
+			#hit points for barbarian = 12 + con mod
+			@hp = 12 + (@con-10)/2
 		elsif @c_class.name == "Bard"
 			@cha = stat[5]
 			@dex = stat[4]
@@ -298,6 +342,7 @@ class CharactersController < ApplicationController
 		end
 	end
 
+	#generates all the data for the preview page
 	def preview
 		#getting params from form entries
 		race_id_temp = params[:race][:race_id].to_i
@@ -315,8 +360,9 @@ class CharactersController < ApplicationController
 		if random?(@c_class)
 			@c_class = CClass.all.sample
 		end
-		@lvl = 1 
-		abl_modify_by_class(generate_abilities(@lvl))
+		@lvl = params[:lvl].to_i
+		@lvl = rand(1..20) if params[:lvl] == ""
+		modify_by_class(generate_abilities(@lvl))
 		modify_by_race
 		generate_skills(@lvl)
 	end
