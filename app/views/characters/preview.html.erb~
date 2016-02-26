@@ -4,7 +4,19 @@
 Weapon Proficiency <%= @wpn_prof %></p>
 <% if @c_class.name == "Barbarian" %>
 <p id="barbtxt">Rages: <%= @rage %><br>
-Rage Damage Bonus: <%= @rage_damage %></p>
+Rage Damage Bonus: <%= @rage_dmg %></p>
+<% elsif @c_class.name == "Bard" %>
+<p id="magetxt">Total spells known: <%= @spells_known %>
+Cantrips: <%= @spells[0] %><br>
+1st Level Spells: <%= @spells[1] %><br>
+2nd Level Spells: <%= @spells[2] %><br>
+3rd Level Spells: <%= @spells[3] %><br>
+4th Level Spells: <%= @spells[4] %><br>
+5th Level Spells: <%= @spells[5] %><br>
+6th Level Spells: <%= @spells[6] %><br>
+7th Level Spells: <%= @spells[7] %><br>
+8th Level Spells: <%= @spells[8] %><br>
+9th Level Spells: <%= @spells[9] %><br></p>
 <% end %>
 <p>Strength: <%= @str %><br>
 Dexterity: <%= @dex %><br>

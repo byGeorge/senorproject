@@ -47,6 +47,8 @@ class CharactersController < ApplicationController
 		@sleight_o_hand = (@dex - 10)/2 
 		@stealth = (@wis - 10)/2 
 		@survival = (@wis - 10)/2 
+		#weapons proficiency bonus
+		@wpn_prof = 2
 		if @c_class.name == "Barbarian"
 			#favoured skills are animal handling, athletics,
 			#intimidation, nature, perception, and survival
@@ -65,9 +67,6 @@ class CharactersController < ApplicationController
 			#special skills
 			@rage = 2
 			@rage_dmg = 2
-			#weapons proficiency bonus
-			@wpn_prof = 2
-			for i in 2..@lvl do level_up(i) end
 		elsif @c_class.name == "Bard"
 			#one point goes to performance, the other to
 			#history, persuasion, sleight of hand, acrobatics, or religion
@@ -79,6 +78,8 @@ class CharactersController < ApplicationController
 			@persuasion += skills[2]
 			@religion += skills[3] + (@int - 10)/2 
 			@sleight_o_hand += skills[4]
+			#special skills
+			@spells_known = 4
 		elsif @c_class.name == "Cleric"
 			#one point goes to medicine, the other to religion
 			@medicine += 1
@@ -147,20 +148,46 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@religion += skills[3]
 		end
+		for i in 2..@lvl do level_up(i) end
 	end # end generate_skills
+
+	def level_spells(lvl)
+		if @c_class.name == "Bard"
+			if lvl == 2
+				spells[1] += 1
+			elsif lvl == 3
+				spells[1] += 1
+				spells[2] += 2
+			elsif lvl == 4
+				spells[0] += 1
+				spells[2] += 1
+			elsif lvl == 5
+				spells[3] += 2
+			elsif lvl == 6
+				
+			end
+		end
+	end
 
 	def level_up(lvl)
 		if @c_class.name == "Barbarian"
-			@hp += 7
-			#every third level, barbarian can rage one more time
-			@rage += 1 if lvl % 3 == 0
+			#hit points increase 7 + con mod per level
+			@hp += (7 + (@con - 10) / 2)
+			#barbarian can rage one more time at levels 3, 6, 12, and 17
+			@rage += 1 if lvl == 3 || lvl == 6 || lvl == 12 || lvl == 17
 			@rage = "unlimited" if lvl == 20
 			#rage gives a bigger damage boost at 9th and 16th levels
 			@rage_dmg += 1 if lvl == 9 || lvl == 16
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
 		elsif @c_class.name == "Bard"
-
+			#hit points increase 5 + con mod per level
+			@hp += (5 + (@con - 10) / 2)
+			@spells_known += 1 if lvl < 10 || lvl == 11 || lvl == 13 || lvl == 15 || lvl == 17
+			@spells_known += 2 if lvl == 10 || lvl == 14 || lvl == 18
+			#better at weapons at 5th, 9th, 13th, and 17th levels
+			@wpn_prof += 1 if lvl % 4 == 1
+			level_spells(lvl)
 		elsif @c_class.name == "Cleric"
 
 		elsif @c_class.name == "Druid"
@@ -209,6 +236,9 @@ class CharactersController < ApplicationController
 			@con = stat[1]
 			@int = stat[2]
 			@wis = stat[3]
+			#hit points for barbarian = 8 + con mod
+			@hp = 8 + (@con-10)/2
+			@spells = [2,2,0,0,0,0,0,0,0,0]
 		elsif @c_class.name == "Cleric"
 			@wis = stat[5]
 			@con = stat[4]
