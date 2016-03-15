@@ -172,6 +172,13 @@ class CharactersController < ApplicationController
 			@int += 1 if abl == 8
 			@wis += 1 if abl == 9
 			@cha += 1 if abl == 10
+		elsif @c_class.name == "Bard"
+			@cha += 1 if abl > 4
+			@dex += 1 if abl >= 4 && abl < 7
+			@str += 1 if abl == 7
+			@con += 1 if abl == 8
+			@int += 1 if abl == 9
+			@wis += 1 if abl == 10
 		end
 	end
 
@@ -434,7 +441,7 @@ class CharactersController < ApplicationController
 			@wis += 1
 			@cha += 1
 			@age = rand(16..100)
-		#for the moment, there is only Mountain Dwarf. Love Mountain Dwarf
+		#for the moment, there is only Mountain Dwarf. Mountain Dwarf is king.
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename(@m, @f, @n)
 			@con += 2
@@ -450,6 +457,12 @@ class CharactersController < ApplicationController
 			@dex += 2
 			@int += 1
 			@age = rand(100..750)
+		end
+	end
+
+	def pick_spells
+		if @race.name == "Bard"
+			
 		end
 	end
 
