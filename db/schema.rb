@@ -16,11 +16,19 @@ ActiveRecord::Schema.define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "c_classes", primary_key: "ID", force: :cascade do |t|
-    t.string "class_name", limit: 30
+  create_table "blurbs", force: :cascade do |t|
+    t.string  "text",              limit: 1028
+    t.integer "lvl_requirement"
+    t.string  "class_requirement", limit: 16
+    t.string  "race_requirement"
+    t.string  "type_requirement"
   end
 
-  create_table "characters", primary_key: "ID", force: :cascade do |t|
+  create_table "c_classes", force: :cascade do |t|
+    t.string "name", limit: 30
+  end
+
+  create_table "characters", force: :cascade do |t|
     t.integer "userid"
     t.string  "name",            limit: 60
     t.integer "level"
@@ -52,7 +60,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "class"
   end
 
-  create_table "dwarf_names", primary_key: "ID", force: :cascade do |t|
+  create_table "dwarf_names", force: :cascade do |t|
     t.string "fname",     limit: 30
     t.string "clan_name", limit: 30
     t.string "gender",    limit: 1
@@ -61,19 +69,19 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "dwarf_names", ["clan_name"], name: "dwarf_names_clan_name_key", unique: true, using: :btree
   add_index "dwarf_names", ["fname"], name: "dwarf_names_fname_key", unique: true, using: :btree
 
-  create_table "elf_names", primary_key: "ID", force: :cascade do |t|
+  create_table "elf_names", force: :cascade do |t|
     t.string "name", limit: 30
   end
 
   add_index "elf_names", ["name"], name: "elf_names_name_key", unique: true, using: :btree
 
-  create_table "elf_syllables", primary_key: "ID", force: :cascade do |t|
+  create_table "elf_syllables", force: :cascade do |t|
     t.string "syllable", limit: 3, null: false
   end
 
   add_index "elf_syllables", ["syllable"], name: "elf_syllables_syllable_key", unique: true, using: :btree
 
-  create_table "human_names", primary_key: "ID", force: :cascade do |t|
+  create_table "human_names", force: :cascade do |t|
     t.string "first_name", limit: 30
     t.string "last_name",  limit: 30
     t.string "nickname",   limit: 30
@@ -82,17 +90,17 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "human_names", ["first_name", "last_name", "nickname"], name: "human_names_first_name_last_name_nickname_key", unique: true, using: :btree
 
-  create_table "races", primary_key: "ID", force: :cascade do |t|
+  create_table "races", force: :cascade do |t|
     t.string "name", limit: 10
   end
 
-  create_table "users", primary_key: "ID", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name", limit: 20
   end
 
   add_index "users", ["name"], name: "users_name_key", unique: true, using: :btree
 
-  add_foreign_key "characters", "c_classes", column: "class", primary_key: "ID", name: "characters_class_fkey"
-  add_foreign_key "characters", "races", column: "race", primary_key: "ID", name: "characters_race_fkey"
-  add_foreign_key "characters", "users", column: "userid", primary_key: "ID", name: "characters_userid_fkey"
+  add_foreign_key "characters", "c_classes", column: "class", name: "characters_class_fkey"
+  add_foreign_key "characters", "races", column: "race", name: "characters_race_fkey"
+  add_foreign_key "characters", "users", column: "userid", name: "characters_userid_fkey"
 end

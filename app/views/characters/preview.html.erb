@@ -1,5 +1,6 @@
 <h1><%= @name %> </h1>
-<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
+<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
+<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
 <p>Hit points: <%= @hp %><br>
 Weapon Proficiency <%= @wpn_prof %></p>
 <% if @c_class.name == "Barbarian" %>

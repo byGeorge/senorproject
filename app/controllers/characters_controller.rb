@@ -1,5 +1,17 @@
 class CharactersController < ApplicationController
 
+	def calculate_height(inches)
+		feet = inches / 12
+		inch = inches % 12
+		if inch == 1
+			@height = ("" + feet.to_s + " feet, " + inch.to_s + " inch")
+		elsif inch == 0
+			@height = ("" + feet.to_s + " feet")
+		else
+			@height = ("" + feet.to_s + " feet, " + inch.to_s + " inches")
+		end
+	end
+
 	#generates ability scores based on level, and returns a range of stats
 	#that will later be modified by class (with modify_by_class(stats[]))
 	#stats arranged from lowest to highest number
@@ -151,6 +163,25 @@ class CharactersController < ApplicationController
 		for i in 2..@lvl do level_up(i) end
 	end # end generate_skills
 
+	def increase_abl
+		abl = rand(0..10)
+		if @c_class.name == "Barbarian"
+			@str += 1 if abl < 3
+			@con += 1 if abl >= 3 && abl < 6
+			@dex += 1 if abl >= 6 && abl < 8
+			@int += 1 if abl == 8
+			@wis += 1 if abl == 9
+			@cha += 1 if abl == 10
+		elsif @c_class.name == "Bard"
+			@cha += 1 if abl > 4
+			@dex += 1 if abl >= 4 && abl < 7
+			@str += 1 if abl == 7
+			@con += 1 if abl == 8
+			@int += 1 if abl == 9
+			@wis += 1 if abl == 10
+		end
+	end
+
 	def level_spells(lvl)
 		if @c_class.name == "Bard"
 			if lvl == 2
@@ -200,6 +231,7 @@ class CharactersController < ApplicationController
 	end
 
 	def level_up(lvl)
+		skills = [0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
 		if @c_class.name == "Barbarian"
 			#hit points increase 7 + con mod per level
 			@hp += (7 + (@con - 10) / 2)
@@ -210,6 +242,7 @@ class CharactersController < ApplicationController
 			@rage_dmg += 1 if lvl == 9 || lvl == 16
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
+			increase_abl
 		elsif @c_class.name == "Bard"
 			#hit points increase 5 + con mod per level
 			@hp += (5 + (@con - 10) / 2)
@@ -239,6 +272,24 @@ class CharactersController < ApplicationController
 		elsif @c_class.name == "Wizard"
 
 		end
+		@acrobatics = skills[0] 
+		@arcana = skills[1]
+		@animal_h = skills[2]
+		@athletics = skills[3]
+		@deception = skills[4]
+		@history = skills[5]
+		@insight = skills[6]
+		@intimidation = skills[7]
+		@investigation = skills[8]
+		@medicine = skills[9]
+		@nature = skills[10]
+		@perception = skills[11]
+		@performance = skills[12]
+		@persuasion = skills[13]
+		@religion = skills[14]
+		@sleight_o_hand = skills[15]
+		@stealth = skills[16]
+		@survival = skills[17]
 	end
 
 
@@ -389,16 +440,29 @@ class CharactersController < ApplicationController
 			@int += 1
 			@wis += 1
 			@cha += 1
-		#for the moment, there is only Mountain Dwarf. Love Mountain Dwarf
+			@age = rand(16..100)
+		#for the moment, there is only Mountain Dwarf. Mountain Dwarf is king.
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename(@m, @f, @n)
 			@con += 2
 			@str += 2
+			#dwarves reach adulthood at 50 and live for about 350 years
+			@age = rand(50..350)
+			calculate_height(rand(48..60))
+			#dwarves are 4-5 feet tall and about 150 pounds
+			@weight = 125 + rand(50)
 		#high elf
  		elsif (@race.name == "Elf")
 			@name = ElfName.choosename
 			@dex += 2
 			@int += 1
+			@age = rand(100..750)
+		end
+	end
+
+	def pick_spells
+		if @race.name == "Bard"
+			
 		end
 	end
 

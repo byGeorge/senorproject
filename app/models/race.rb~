@@ -1,9 +1,4 @@
 class Race < ActiveRecord::Base
-
-	def find_by_id(id)
-		super
-	end
-
 	def self.pickme
 		Race.find_by_name("Random")
 	end

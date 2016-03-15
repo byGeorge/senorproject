@@ -1,12 +1,13 @@
 <h1><%= @name %> </h1>
-<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
+<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
+<p>Height: <%= @height %>, Weight: <%= @weight %>
 <p>Hit points: <%= @hp %><br>
 Weapon Proficiency <%= @wpn_prof %></p>
 <% if @c_class.name == "Barbarian" %>
 <p id="barbtxt">Rages: <%= @rage %><br>
 Rage Damage Bonus: <%= @rage_dmg %></p>
 <% elsif @c_class.name == "Bard" %>
-<p id="magetxt">Total spells known: <%= @spells_known %>
+<p id="magetxt">Total spells known: <%= @spells_known %><br>
 Cantrips: <%= @spells[0] %><br>
 1st Level Spells: <%= @spells[1] %><br>
 2nd Level Spells: <%= @spells[2] %><br>
