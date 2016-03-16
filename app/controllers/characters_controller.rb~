@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
 
+	#returns a string that converts inches into feet and inches
 	def calculate_height(inches)
 		feet = inches / 12
 		inch = inches % 12
@@ -163,6 +164,8 @@ class CharactersController < ApplicationController
 		for i in 2..@lvl do level_up(i) end
 	end # end generate_skills
 
+	#occasionally, gaining a level allows an increase in ability
+	#this will increase abilities randomly, giving priority to class favorites
 	def increase_abl
 		abl = rand(0..10)
 		if @c_class.name == "Barbarian"
@@ -182,6 +185,9 @@ class CharactersController < ApplicationController
 		end
 	end
 
+	#every character level increases spell ablity.
+	#this method will choose spells from a list, and increase 
+	#spell capacity
 	def level_spells(lvl)
 		if @c_class.name == "Bard"
 			if lvl == 2
@@ -230,6 +236,7 @@ class CharactersController < ApplicationController
 		end
 	end
 
+	#levels up character
 	def level_up(lvl)
 		skills = [0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
 		if @c_class.name == "Barbarian"
@@ -457,12 +464,6 @@ class CharactersController < ApplicationController
 			@dex += 2
 			@int += 1
 			@age = rand(100..750)
-		end
-	end
-
-	def pick_spells
-		if @race.name == "Bard"
-			
 		end
 	end
 
