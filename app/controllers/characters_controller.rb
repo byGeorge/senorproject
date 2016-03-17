@@ -113,7 +113,7 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@perception += skills[3]
 			@survival += skills[4]
-		# The following will not be used for some time, but will be added after project is presented
+# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
 			#favored skills are athletics and perception
 			@athletics += 1

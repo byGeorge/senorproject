@@ -9,11 +9,9 @@ Rage Damage Bonus: <%= @rage_dmg %></p>
 <% elsif @c_class.name == "Bard" %>
 <p id="magetxt">Total spells known: <%= @spells_known %><br>
 Cantrips: <%= @spells[0] %><br>
-<% @spells.each do %>
-<%= @spells.name if @spells.level == 0 %>
+<%= @spells.each.name if @spells.level == 0 %>
 1st Level Spells: <%= @spells[1] %><br>
-<% @spells.each do %>
-<%= @spells.name if @spells.level == 1 %>
+<%= @spells.each.name if @spells.level == 1 %>
 2nd Level Spells: <%= @spells[2] %><br>
 3rd Level Spells: <%= @spells[3] %><br>
 4th Level Spells: <%= @spells[4] %><br>

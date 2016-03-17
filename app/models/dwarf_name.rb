@@ -3,7 +3,7 @@ class DwarfName < ActiveRecord::Base
 	def self.choosename(m, f, n)
 		names = DwarfName.all
 		fname = DwarfName.genderlimit(m, f, n)
-		name = fname.sample.fname + names.sample.clan_name
+		name = fname.sample.fname + " " + names.sample.clan_name + names.sample.clan_name
 	end
 
 	def self.genderlimit(m, f, n)

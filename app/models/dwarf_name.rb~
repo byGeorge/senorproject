@@ -1,5 +1,4 @@
 class DwarfName < ActiveRecord::Base
-	self.primary_key = "nid"
 
 	def self.choosename(m, f, n)
 		names = DwarfName.all

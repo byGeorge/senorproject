@@ -113,6 +113,7 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@perception += skills[3]
 			@survival += skills[4]
+# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
 			#favored skills are athletics and perception
 			@athletics += 1
@@ -264,6 +265,7 @@ class CharactersController < ApplicationController
 
 		elsif @c_class.name == "Druid"
 
+		#code for these will be added after presentation
 		elsif @c_class.name == "Fighter"
 
 		elsif @c_class.name == "Monk"
@@ -350,6 +352,7 @@ class CharactersController < ApplicationController
 			@int = stat[1]
 			@str = stat[2]
 			@cha = stat[3]
+		#code for this will be added after presentation
 		elsif @c_class.name == "Fighter"
 			@str = stat[5]
 			@con = stat[4]
