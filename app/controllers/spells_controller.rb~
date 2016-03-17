@@ -1,0 +1,10 @@
+class SpellsController < ApplicationController
+	#picks a random spell at a particular level from the spell list
+	def pick_spell(level, list)
+		if list == nil
+			spell = Spell.all.sample until (spell.class == @c_class.name) && (spell.level == level)
+		else
+			spell = Spell.all.sample until (spell.class == @c_class.name) && (list.not.contains spell) && (spell.level == level)
+		end
+	end
+end

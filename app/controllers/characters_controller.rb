@@ -93,6 +93,8 @@ class CharactersController < ApplicationController
 			@sleight_o_hand += skills[4]
 			#special skills
 			@spells_known = 4
+			#picks random spells
+			@spells_list = Spell.pick_spell(0, nil, "Bard")
 		elsif @c_class.name == "Cleric"
 			#one point goes to medicine, the other to religion
 			@medicine += 1

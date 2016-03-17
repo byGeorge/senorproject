@@ -94,6 +94,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "name", limit: 10
   end
 
+  create_table "spells", force: :cascade do |t|
+    t.integer "level"
+    t.string  "spell", limit: 50
+    t.string  "class", limit: 32
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", limit: 20
   end
