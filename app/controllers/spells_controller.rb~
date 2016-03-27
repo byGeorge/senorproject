@@ -1,8 +1,8 @@
 class SpellsController < ApplicationController
-	#picks a random spell at a particular level from the spell list
-	def pick_spell(level, list)
+
+	def self.pick_spell(lvl, list, cclass)
 		if list == nil
-			spell = Spell.all.sample until (spell.class == @c_class.name) && (spell.level == level)
+			spell = Spell.all.sample until (spell.class == @c_class.name) && (spell.level == lvl)
 		else
 			spell = Spell.all.sample until (spell.class == @c_class.name) && (list.not.contains spell) && (spell.level == level)
 		end
