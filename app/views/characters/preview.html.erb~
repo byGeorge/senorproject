@@ -11,44 +11,44 @@ Rage Damage Bonus: <%= @rage_dmg %></p>
 Cantrips: <%= @spells[0] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 0 %>
-<% end %>
+<% end %><br>
 1st Level Spells: <%= @spells[1] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 1 %>
-<% end %>
+<% end %><br>
 2nd Level Spells: <%= @spells[2] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 2 %>
-<% end %>
+<% end %><br>
 3rd Level Spells: <%= @spells[3] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 3 %>
-<% end %>
+<% end %><br>
 4th Level Spells: <%= @spells[4] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 4 %>
-<% end %>
+<% end %><br>
 5th Level Spells: <%= @spells[5] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 5 %>
-<% end %>
+<% end %><br>
 6th Level Spells: <%= @spells[6] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 6 %>
-<% end %>
+<% end %><br>
 7th Level Spells: <%= @spells[7] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 7 %>
-<% end %>
+<% end %><br>
 8th Level Spells: <%= @spells[8] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 8 %>
-<% end %>
-9th Level Spells: <%= @spells[9] %><br></p>
+<% end %><br>
+9th Level Spells: <%= @spells[9] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 9 %>
 <% end %>
-<% end %>
+<% end %></p>
 <p>Strength: <%= @str %><br>
 Dexterity: <%= @dex %><br>
 Constitution: <%= @con %><br>

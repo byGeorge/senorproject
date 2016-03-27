@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /home/george/senorproject/app/models/spell.rb @ line 12 Spell.pick_spell:
+
+     [1;34m3[0m: [32mdef[0m [1;36mself[0m.[1;34mpick_spell[0m(level, list, c_class)
+     [1;34m4[0m: 	[1;34m#if the classes have a spell list[0m
+     [1;34m5[0m: 	[32mif[0m (c_class == [31m[1;31m"[0m[31mBard[1;31m"[0m[31m[0m)
+     [1;34m6[0m: 	temp = [1;34;4mSpell[0m.all.sample
+     [1;34m7[0m: 		[32mif[0m list == [1;36mnil[0m
+     [1;34m8[0m: 			temp =  [1;34;4mSpell[0m.all.sample [32muntil[0m (temp.cclass.to_s.include?(c_class) && temp.level == level)
+     [1;34m9[0m: 		[32melse[0m
+    [1;34m10[0m: 			temp =  [1;34;4mSpell[0m.all.sample [32muntil[0m (!list.include?(temp) && temp.cclass == c_class && temp.level == level)
+    [1;34m11[0m: 		[32mend[0m
+ => [1;34m12[0m: 	binding.pry
+    [1;34m13[0m: 	list.push(temp)
+    [1;34m14[0m: 	[1;34m#for the classes that know all the spells[0m
+    [1;34m15[0m: 	[32melsif[0m (c_class == [31m[1;31m"[0m[31mCleric[1;31m"[0m[31m[0m)
+    [1;34m16[0m: 		[32mif[0m (lv == [1;34m0[0m)
+    [1;34m17[0m: 			temp = [1;34;4mSpell[0m.all.sample
+    [1;34m18[0m: 			[32mif[0m list == [1;36mnil[0m
+    [1;34m19[0m: 				list.push(temp)
+    [1;34m20[0m: 			[32melse[0m
+    [1;34m21[0m: 				temp =  [1;34;4mSpell[0m.all.sample [32muntil[0m (temp.cclass.to_s.include?(c_class) && temp.level == [1;34m0[0m)
+    [1;34m22[0m: 				list.push(temp)
+    [1;34m23[0m: 			[32mend[0m
+    [1;34m24[0m: 		[32melse[0m
+    [1;34m25[0m: 			slist = [1;34;4mSpell[0m.all
+    [1;34m26[0m: 			slist.each [32mdo[0m |spell|
+    [1;34m27[0m: 				list.push [32mif[0m (spell.cclass.include?(c_class) && spell.level == level)
+    [1;34m28[0m: 			[32mend[0m
+    [1;34m29[0m: 		[32mend[0m
+    [1;34m30[0m: 	[32mend[0m [1;34m#end if c_class[0m
+    [1;34m31[0m: [32mend[0m [1;34m#end pick_spell[0m
+

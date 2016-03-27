@@ -6,7 +6,7 @@ Weapon Proficiency <%= @wpn_prof %></p>
 <% if @c_class.name == "Barbarian" %>
 <p id="barbtxt">Rages: <%= @rage %><br>
 Rage Damage Bonus: <%= @rage_dmg %></p>
-<% elsif @c_class.name == "Bard" %>
+<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" %>
 <p id="magetxt">Total spells known: <%= @spells_known %><br>
 Cantrips: <%= @spells[0] %><br>
 <% @spells_list.each do |spell| %>
@@ -44,11 +44,11 @@ Cantrips: <%= @spells[0] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 8 %>
 <% end %><br>
-9th Level Spells: <%= @spells[9] %><br></p>
+9th Level Spells: <%= @spells[9] %><br>
 <% @spells_list.each do |spell| %>
 <%= spell.spell + ", " if spell.level == 9 %>
-<% end %><br>
 <% end %>
+<% end %></p>
 <p>Strength: <%= @str %><br>
 Dexterity: <%= @dex %><br>
 Constitution: <%= @con %><br>

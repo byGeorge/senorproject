@@ -95,12 +95,17 @@ class CharactersController < ApplicationController
 			@spells_known = 4
 			#picks random spells
 			@spells_list = Array.new
-			3.times { Spell.pick_spell(0, @spells_list, "Bard") }
-			Spell.pick_spell(1, @spells_list, "Bard")
+			2.times { Spell.pick_spell(0, @spells_list, "Bard") } 
+			4.times { Spell.pick_spell(1, @spells_list, "Bard") }
 		elsif @c_class.name == "Cleric"
 			#one point goes to medicine, the other to religion
 			@medicine += 1
 			@religion += 1
+			#special skills
+			#picks random spells
+			@spells_list = Array.new
+			3.times { Spell.pick_spell(0, @spells_list, "Cleric") } 
+			2.times { Spell.pick_spell(1, @spells_list, "Cleric") }
 		elsif @c_class.name == "Druid"
 			#favoured skills are animal handling, medicine,
 			#nature, perception, and survival
@@ -115,7 +120,7 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@perception += skills[3]
 			@survival += skills[4]
-# The following will not be used for some time, but will be added after project is presented
+		# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
 			#favored skills are athletics and perception
 			@athletics += 1
@@ -165,7 +170,8 @@ class CharactersController < ApplicationController
 			@medicine += skills[1]
 			@nature += skills[2]
 			@religion += skills[3]
-		end
+		end #end if class
+		#level up to chosen level
 		for i in 2..@lvl do level_up(i) end
 	end # end generate_skills
 
@@ -187,8 +193,15 @@ class CharactersController < ApplicationController
 			@con += 1 if abl == 8
 			@int += 1 if abl == 9
 			@wis += 1 if abl == 10
-		end
-	end
+		elsif @c_class.name == "Cleric"
+			@wis += 1 if abl > 4
+			@str += 1 if abl >= 4 && abl < 6
+			@con += 1 if abl >= 6 && abl < 8
+			@dex += 1 if abl == 8
+			@int += 1 if abl == 9
+			@cha += 1 if abl == 10
+		end #end if class
+	end #end increase_abl
 
 	#every character level increases spell ablity.
 	#this method will choose spells from a list, and increase 
@@ -261,14 +274,71 @@ class CharactersController < ApplicationController
 				@spells[6] += 1
 			elsif lvl == 20
 				@spells[7] += 1
-			end
-		end
-	end
+			end # end if level
+		elsif @c_class.name == "Cleric"
+			#clerics know all of the spells available to their class
+			if lvl == 2
+				#add to the number of spells cast per day
+				@spells[1] += 1
+			elsif lvl == 3
+				@spells[1] += 1
+				@spells[2] += 2
+				#cleric now has access to lvl 2 spells
+				Spell.pick_spell(2, @spells_list, "Cleric")
+			elsif lvl == 4
+				@spells[0] += 1
+				@spells[2] += 1
+			elsif lvl == 5
+				@spells[3] += 2
+				Spell.pick_spell(3, @spells_list, "Cleric")
+			elsif lvl == 6
+				@spells[3] += 1
+			elsif lvl == 7
+				@spells[4] += 1
+				Spell.pick_spell(4, @spells_list, "Cleric")
+			elsif lvl == 8
+				@spells[4] += 1
+			elsif lvl == 9
+				@spells[4] += 1
+				@spells[5] += 1
+				Spell.pick_spell(5, @spells_list, "Cleric")
+			elsif lvl == 10
+				@spells[0] += 1
+				@spells[5] += 1
+				Spell.pick_spell(0, @spells_list, "Cleric")
+			elsif lvl == 11
+				@spells[6] += 1
+				Spell.pick_spell(6, @spells_list, "Cleric")
+			elsif lvl == 12
+				
+			elsif lvl == 13
+				@spells[7] += 1
+				Spell.pick_spell(7, @spells_list, "Cleric")
+			elsif lvl == 14
+
+			elsif lvl == 15
+				@spells[8] += 1
+				Spell.pick_spell(8, @spells_list, "Cleric")
+			elsif lvl == 16
+
+			elsif lvl == 17
+				@spells[9] += 1
+				Spell.pick_spell(9, @spells_list, "Cleric")
+			elsif lvl == 18
+				@spells[5] += 1
+			elsif lvl == 19
+				@spells[6] += 1
+			elsif lvl == 20
+				@spells[7] += 1
+			end # end if level
+		end # end if class
+	end #end level spells
 
 	#levels up character
 	def level_up(lvl)
 		skills = [0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
 		if @c_class.name == "Barbarian"
+			increase_abl
 			#hit points increase 7 + con mod per level
 			@hp += (7 + (@con - 10) / 2)
 			#barbarian can rage one more time at levels 3, 6, 12, and 17
@@ -278,17 +348,22 @@ class CharactersController < ApplicationController
 			@rage_dmg += 1 if lvl == 9 || lvl == 16
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
-			increase_abl
 		elsif @c_class.name == "Bard"
+			increase_abl
 			#hit points increase 5 + con mod per level
 			@hp += (5 + (@con - 10) / 2)
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
 			level_spells(lvl)
 		elsif @c_class.name == "Cleric"
-
+			increase_abl
+			#hit points increase 8 + con mod per level
+			@hp += (8 + (@con - 10) / 2)
+			#better at weapons at 5th, 9th, 13th, and 17th levels
+			@wpn_prof += 1 if lvl % 4 == 1
+			level_spells(lvl)
 		elsif @c_class.name == "Druid"
-
+			increase_abl
 		#code for these will be added after presentation
 		elsif @c_class.name == "Fighter"
 
@@ -306,7 +381,7 @@ class CharactersController < ApplicationController
 
 		elsif @c_class.name == "Wizard"
 
-		end
+		end #end if class
 		@acrobatics = skills[0] 
 		@arcana = skills[1]
 		@animal_h = skills[2]
@@ -325,7 +400,7 @@ class CharactersController < ApplicationController
 		@sleight_o_hand = skills[15]
 		@stealth = skills[16]
 		@survival = skills[17]
-	end
+	end #end level up
 
 
 	#initializes and modifies abilities
@@ -352,7 +427,7 @@ class CharactersController < ApplicationController
 			@con = stat[1]
 			@int = stat[2]
 			@wis = stat[3]
-			#hit points for barbarian = 8 + con mod
+			#hit points for bard = 8 + con mod
 			@hp = 8 + (@con-10)/2
 			@spells = [2,2,0,0,0,0,0,0,0,0]
 		elsif @c_class.name == "Cleric"
@@ -366,6 +441,9 @@ class CharactersController < ApplicationController
 			@dex = stat[0]
 			@int = stat[1]
 			@cha = stat[2]
+			#hit points for cleric = 8 + con mod
+			@hp = 8 + (@con-10)/2
+			@spells = [3,2,0,0,0,0,0,0,0,0]
 		elsif @c_class.name == "Druid"
 			@wis = stat[5]
 			@con = stat[4]
@@ -376,7 +454,9 @@ class CharactersController < ApplicationController
 			@int = stat[1]
 			@str = stat[2]
 			@cha = stat[3]
-		#code for this will be added after presentation
+			#hit points for Druid = 8 + con mod
+			@hp = 8 + (@con-10)/2
+		# remaining code for this will be added after presentation
 		elsif @c_class.name == "Fighter"
 			@str = stat[5]
 			@con = stat[4]
@@ -460,7 +540,7 @@ class CharactersController < ApplicationController
 			@con = stat[1]
 			@wis = stat[2]
 			@cha = stat[3]
-		end
+		end #end if class
 		stat #return statement
 	end #end modify by class
 
@@ -493,8 +573,8 @@ class CharactersController < ApplicationController
 			@dex += 2
 			@int += 1
 			@age = rand(100..750)
-		end
-	end
+		end #end if race
+	end #end modify_by_race
 
 	#generates all the data for the preview page
 	def preview
@@ -519,8 +599,9 @@ class CharactersController < ApplicationController
 		modify_by_class(generate_abilities(@lvl))
 		modify_by_race
 		generate_skills(@lvl)
-	end
+	end #end preview
 
+	#Determines if object is random
 	def random?(obj)
 		obj == "Random" || obj == nil
 	end
