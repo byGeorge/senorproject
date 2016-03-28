@@ -105,7 +105,7 @@ class CharactersController < ApplicationController
 			#picks random spells
 			@spells_list = Array.new
 			3.times { Spell.pick_spell(0, @spells_list, "Cleric") } 
-			2.times { Spell.pick_spell(1, @spells_list, "Cleric") }
+			Spell.pick_spell(1, @spells_list, "Cleric")
 		elsif @c_class.name == "Druid"
 			#favoured skills are animal handling, medicine,
 			#nature, perception, and survival
@@ -120,6 +120,11 @@ class CharactersController < ApplicationController
 			@nature += skills[2]
 			@perception += skills[3]
 			@survival += skills[4]
+			#special skills
+			#picks random spells
+			@spells_list = Array.new
+			2.times { Spell.pick_spell(0, @spells_list, "Druid") } 
+			Spell.pick_spell(1, @spells_list, "Bard")
 		# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
 			#favored skills are athletics and perception
@@ -197,6 +202,13 @@ class CharactersController < ApplicationController
 			@wis += 1 if abl > 4
 			@str += 1 if abl >= 4 && abl < 6
 			@con += 1 if abl >= 6 && abl < 8
+			@dex += 1 if abl == 8
+			@int += 1 if abl == 9
+			@cha += 1 if abl == 10
+		elsif @c_class.name == "Druid"
+			@wis += 1 if abl > 4
+			@con += 1 if abl >= 4 && abl < 7
+			@str += 1 if abl == 7
 			@dex += 1 if abl == 8
 			@int += 1 if abl == 9
 			@cha += 1 if abl == 10
@@ -288,6 +300,7 @@ class CharactersController < ApplicationController
 			elsif lvl == 4
 				@spells[0] += 1
 				@spells[2] += 1
+				Spell.pick_spell(0, @spells_list, "Cleric")
 			elsif lvl == 5
 				@spells[3] += 2
 				Spell.pick_spell(3, @spells_list, "Cleric")
@@ -324,6 +337,63 @@ class CharactersController < ApplicationController
 			elsif lvl == 17
 				@spells[9] += 1
 				Spell.pick_spell(9, @spells_list, "Cleric")
+			elsif lvl == 18
+				@spells[5] += 1
+			elsif lvl == 19
+				@spells[6] += 1
+			elsif lvl == 20
+				@spells[7] += 1
+			end # end if level
+		elsif @c_class.name == "Druid"
+			#clerics know all of the spells available to their class
+			if lvl == 2
+				#add to the number of spells cast per day
+				@spells[1] += 1
+			elsif lvl == 3
+				@spells[1] += 1
+				@spells[2] += 2
+				#Druid now has access to lvl 2 spells
+				Spell.pick_spell(2, @spells_list, "Druid")
+			elsif lvl == 4
+				@spells[0] += 1
+				@spells[2] += 1
+				Spell.pick_spell(0, @spells_list, "Druid")
+			elsif lvl == 5
+				@spells[3] += 2
+				Spell.pick_spell(3, @spells_list, "Druid")
+			elsif lvl == 6
+				@spells[3] += 1
+			elsif lvl == 7
+				@spells[4] += 1
+				Spell.pick_spell(4, @spells_list, "Druid")
+			elsif lvl == 8
+				@spells[4] += 1
+			elsif lvl == 9
+				@spells[4] += 1
+				@spells[5] += 1
+				Spell.pick_spell(5, @spells_list, "Druid")
+			elsif lvl == 10
+				@spells[0] += 1
+				@spells[5] += 1
+				Spell.pick_spell(0, @spells_list, "Druid")
+			elsif lvl == 11
+				@spells[6] += 1
+				Spell.pick_spell(6, @spells_list, "Druid")
+			elsif lvl == 12
+				
+			elsif lvl == 13
+				@spells[7] += 1
+				Spell.pick_spell(7, @spells_list, "Druid")
+			elsif lvl == 14
+
+			elsif lvl == 15
+				@spells[8] += 1
+				Spell.pick_spell(8, @spells_list, "Druid")
+			elsif lvl == 16
+
+			elsif lvl == 17
+				@spells[9] += 1
+				Spell.pick_spell(9, @spells_list, "Druid")
 			elsif lvl == 18
 				@spells[5] += 1
 			elsif lvl == 19
@@ -444,7 +514,6 @@ class CharactersController < ApplicationController
 			#hit points for cleric = 8 + con mod
 			@hp = 8 + (@con-10)/2
 			@spells = [3,2,0,0,0,0,0,0,0,0]
-			@spells_list = Array.new
 		elsif @c_class.name == "Druid"
 			@wis = stat[5]
 			@con = stat[4]
@@ -457,6 +526,7 @@ class CharactersController < ApplicationController
 			@cha = stat[3]
 			#hit points for Druid = 8 + con mod
 			@hp = 8 + (@con-10)/2
+			@spells = [2,2,0,0,0,0,0,0,0,0]
 		# remaining code for this will be added after presentation
 		elsif @c_class.name == "Fighter"
 			@str = stat[5]

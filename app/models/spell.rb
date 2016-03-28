@@ -11,7 +11,7 @@ class Spell < ActiveRecord::Base
 			end
 		list.push(temp)
 		#for the classes that know all the spells
-		elsif (c_class == "Cleric")
+		elsif (c_class == "Cleric" || "Druid")
 			if (level == 0)
 				temp = Spell.all.sample
 				if list == nil
@@ -22,8 +22,9 @@ class Spell < ActiveRecord::Base
 				end
 			else
 				slist = Spell.all
+				binding.pry
 				slist.each do |spell|
-					list.push(spell) if (spell.cclass.include?(c_class) && spell.level == level)
+					list.push(spell) if (spell.cclass.to_s.include?(c_class) && spell.level == level)
 				end
 			end
 		end #end if c_class
