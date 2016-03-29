@@ -22,7 +22,6 @@ class Spell < ActiveRecord::Base
 				end
 			else
 				slist = Spell.all
-				binding.pry
 				slist.each do |spell|
 					list.push(spell) if (spell.cclass.to_s.include?(c_class) && spell.level == level)
 				end

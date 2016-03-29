@@ -215,7 +215,7 @@ class CharactersController < ApplicationController
 		end #end if class
 	end #end increase_abl
 
-	#every character level increases spell ablity.
+	#every character level increases spell ability.
 	#this method will choose spells from a list, and increase 
 	#spell capacity
 	def level_spells(lvl)
