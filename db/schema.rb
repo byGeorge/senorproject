@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317061757) do
+ActiveRecord::Schema.define(version: 20160329043524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appearances", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "blurbs", force: :cascade do |t|
     t.string  "text",              limit: 1028
@@ -96,8 +101,8 @@ ActiveRecord::Schema.define(version: 20160317061757) do
 
   create_table "spells", force: :cascade do |t|
     t.integer "level"
-    t.string  "spell", limit: 50
-    t.string  "class", limit: 32
+    t.string  "spell",  limit: 50
+    t.string  "cclass", limit: 32
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,7 +6,7 @@ Weapon Proficiency <%= @wpn_prof %></p>
 <% if @c_class.name == "Barbarian" %>
 <p id="barbtxt">Rages: <%= @rage %><br>
 Rage Damage Bonus: <%= @rage_dmg %></p>
-<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" %>
+<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" || @c_class.name == "Druid" %>
 <p id="magetxt">Total spells known: <%= @spells_known %><br>
 Cantrips: <%= @spells[0] %><br>
 <% @spells_list.each do |spell| %>
@@ -74,6 +74,7 @@ Religion: <%= @religion %><br>
 Sleight of Hand: <%= @sleight_o_hand %><br>
 Stealth: <%= @stealth %><br>
 Survival: <%= @survival %><br>
+Appearance and characteristics: <=% @appearance =>
 <p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
 <br>
 or you can <a href="/view">view</a> or <a href="/print">print</a> a character.

@@ -80,6 +80,7 @@ class CharactersController < ApplicationController
 			#special skills
 			@rage = 2
 			@rage_dmg = 2
+			#description of appearance
 		elsif @c_class.name == "Bard"
 			#one point goes to performance, the other to
 			#history, persuasion, sleight of hand, acrobatics, or religion
@@ -675,6 +676,7 @@ class CharactersController < ApplicationController
 		modify_by_class(generate_abilities(@lvl))
 		modify_by_race
 		generate_skills(@lvl)
+		@appearance = Appearance.generate
 	end #end preview
 
 	#Determines if object is random
