@@ -81,7 +81,6 @@ class CharactersController < ApplicationController
 			@rage = 2
 			@rage_dmg = 2
 			#description of appearance
-			@appearance = Appearance.generate
 		elsif @c_class.name == "Bard"
 			#one point goes to performance, the other to
 			#history, persuasion, sleight of hand, acrobatics, or religion
@@ -635,6 +634,7 @@ class CharactersController < ApplicationController
 			@wis += 1
 			@cha += 1
 			@age = rand(16..100)
+			@weight = rand(125..250)
 		#for the moment, there is only Mountain Dwarf. Mountain Dwarf is king.
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename(@m, @f, @n)
@@ -650,7 +650,7 @@ class CharactersController < ApplicationController
 			@name = ElfName.choosename
 			@dex += 2
 			@int += 1
-			@age = rand(100..750)
+			@age = rand(100..125)
 		end #end if race
 	end #end modify_by_race
 
@@ -677,6 +677,7 @@ class CharactersController < ApplicationController
 		modify_by_class(generate_abilities(@lvl))
 		modify_by_race
 		generate_skills(@lvl)
+		@appearance = Appearance.generate
 	end #end preview
 
 	#Determines if object is random

@@ -10,7 +10,7 @@ class Appearance < ActiveRecord::Base
 			if !blurb.include?(add) 
 				good = 1
 				blurb.each do |meow| 
-					add.category.eql?(meow.category) ? "" : good = 0
+					add.category.eql?(meow.category) ? good = 0 : ""
 				end
 				if good == 1
 					blurb.push(add)

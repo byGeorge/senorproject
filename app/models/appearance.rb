@@ -4,7 +4,7 @@ class Appearance < ActiveRecord::Base
 		blurb = Array.new
 		blurb.push(Appearance.all.sample)
 		i = 0
-		while i <= rand(0..2) do 
+		while i < rand(0..2) do 
 			add = Appearance.all.sample 
 			#makes sure two blurbs from the same category aren't added to the appearance paragraph
 			if !blurb.include?(add) 

@@ -1,81 +1,82 @@
-<h1><%= @name %> </h1>
-<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
-<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
-<p>Hit points: <%= @hp %><br>
-Weapon Proficiency <%= @wpn_prof %></p>
-<% if @c_class.name == "Barbarian" %>
-<p id="barbtxt">Rages: <%= @rage %><br>
-Rage Damage Bonus: <%= @rage_dmg %></p>
-<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" || @c_class.name == "Druid" %>
-<p id="magetxt">Total spells known: <%= @spells_known %><br>
-Cantrips: <%= @spells[0] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 0 %>
-<% end %><br>
-1st Level Spells: <%= @spells[1] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 1 %>
-<% end %><br>
-2nd Level Spells: <%= @spells[2] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 2 %>
-<% end %><br>
-3rd Level Spells: <%= @spells[3] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 3 %>
-<% end %><br>
-4th Level Spells: <%= @spells[4] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 4 %>
-<% end %><br>
-5th Level Spells: <%= @spells[5] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 5 %>
-<% end %><br>
-6th Level Spells: <%= @spells[6] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 6 %>
-<% end %><br>
-7th Level Spells: <%= @spells[7] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 7 %>
-<% end %><br>
-8th Level Spells: <%= @spells[8] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 8 %>
-<% end %><br>
-9th Level Spells: <%= @spells[9] %><br>
-<% @spells_list.each do |spell| %>
-<%= spell.spell + ", " if spell.level == 9 %>
-<% end %>
-<% end %></p>
-<p>Strength: <%= @str %><br>
-Dexterity: <%= @dex %><br>
-Constitution: <%= @con %><br>
-Intelligence: <%= @int %><br>
-Wisdom: <%= @wis %><br>
-Charisma: <%= @cha %></p>
-<p>Skills: <br>
-Acrobatics: <%= @acrobatics %><br>
-Animal Handling: <%= @animal_h %><br>
-Arcana: <%= @arcana %><br>
-Athletics: <%= @athletics %><br>
-Deception: <%= @deception %><br>
-History: <%= @history %><br>
-Insight: <%= @insight %><br>
-Intimidation: <%= @intimidation %><br>
-Investigation: <%= @investigation %><br>
-Medicine: <%= @medicine %><br>
-Nature: <%= @nature %><br>
-Perception: <%= @perception %><br>
-Performance: <%= @performance %><br>
-Persuasion: <%= @persuasion %><br>
-Religion: <%= @religion %><br>
-Sleight of Hand: <%= @sleight_o_hand %><br>
-Stealth: <%= @stealth %><br>
-Survival: <%= @survival %><br>
-Appearance and characteristics: <%= @appearance %>
-<p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
-<br>
-or you can <a href="/view">view</a> or <a href="/print">print</a> a character.
-</p>
+<div id="everything">
+	<div id="header">
+		<h1><%= @name %> </h1>
+		<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
+	</div>
+	<div id="column_box">
+		<div id="column_third">
+			<h3>Skills: </h3>
+			<dl>
+				<dt>Acrobatics:</dt><dd><%= @acrobatics %></dd>
+				<dt>Animal Handling:</dt><dd><%= @animal_h %></dd>
+				<dt>Arcana:</dt><dd><%= @arcana %></dd>
+				<dt>Athletics:</dt><dd><%= @athletics %></dd>
+				<dt>Deception:</dt><dd><%= @deception %></dd>
+				<dt>History:</dt><dd><%= @history %></dd>
+				<dt>Insight:</dt><dd><%= @insight %></dd>
+				<dt>Intimidation:</dt><dd><%= @intimidation %></dd>
+				<dt>Investigation:</dt><dd><%= @investigation %></dd>
+				<dt>Medicine:</dt><dd><%= @medicine %></dd>
+				<dt>Nature:</dt><dd><%= @nature %></dd>
+				<dt>Perception:</dt><dd><%= @perception %></dd>
+				<dt>Performance:</dt><dd><%= @performance %></dd>
+				<dt>Persuasion:</dt><dd><%= @persuasion %></dd>
+				<dt>Religion:</dt><dd><%= @religion %></dd>
+				<dt>Sleight of Hand:</dt><dd><%= @sleight_o_hand %></dd>
+				<dt>Stealth:</dt><dd><%= @stealth %></dd>
+				<dt>Survival:</dt><dd><%= @survival %></dd>
+			</dl>
+		</div><!-- end div column_third (skills) -->
+		<div id="column_third">
+			<h4>Hit points: <%= @hp %></h4>
+			<h5>Weapon Proficiency <%= @wpn_prof %></h5>
+			<% if @c_class.name == "Barbarian" %>
+				<h4>Rages: <%= @rage %></h4>
+				<h5>Rage Damage Bonus: <%= @rage_dmg %></h5>
+			<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" || @c_class.name == "Druid" %>
+				<% if @c_class.name == "Bard" %>
+					<h4>Total spells known: <%= @spells_known %></h4>
+				<% end %>
+				<dl>
+					<dt>Cantrips: <%= @spells[0] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 0 }.map(&:spell).join(', ') %></dd>
+					<dt>1st Level Spells: <%= @spells[1] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 1 }.map(&:spell).join(', ') %></dd>
+					<dt>2nd Level Spells: <%= @spells[2] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 2 }.map(&:spell).join(', ') %></dd>	
+					<dt>3rd Level Spells: <%= @spells[3] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 3 }.map(&:spell).join(', ') %></dd>
+					<dt>4th Level Spells: <%= @spells[4] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 4 }.map(&:spell).join(', ') %></dd>
+					<dt>5th Level Spells: <%= @spells[5] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 5 }.map(&:spell).join(', ') %></dd>
+					<dt>6th Level Spells: <%= @spells[6] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 6 }.map(&:spell).join(', ') %></dd>
+					<dt>7th Level Spells: <%= @spells[7] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 7 }.map(&:spell).join(', ') %></dd>
+					<dt>8th Level Spells: <%= @spells[8] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 8 }.map(&:spell).join(', ') %></dd>
+					<dt>9th Level Spells: <%= @spells[9] %></dt>
+					<dd><%= @spells_list.select {|spell| spell.level == 9 }.map(&:spell).join(', ') %></dd>
+				</dl>
+			<% end %>
+		</div><!-- end div column_third (combat) -->
+		<div id="column_third">
+			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
+			Quirks: <%= @appearance %>
+		</div><!-- end div column_third (appearances) !>
+		<div id="abilities">
+			<dl>
+				<dt>Strength:</dt><dd><%= @str %></dd>
+				<dt>Dexterity:</dt><dd><%= @dex %></dd>
+				<dt>Constitution:</dt><dd><%= @con %></dd>
+				<dt>Intelligence:</dt><dd><%= @int %></dd>
+				<dt>Wisdom:</dt><dd><%= @wis %></dd>
+				<dt>Charisma:</dt><dd><%= @cha %></dd>
+			</dl>
+		</div><!-- end div abilities -->
+	<p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
+	<br>
+	or you can <a href="/view">view</a> or <a href="/print">print</a> a character.
+	</p>
+</div> <!-- end div everything -->

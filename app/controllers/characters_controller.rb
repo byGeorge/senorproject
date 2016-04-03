@@ -634,6 +634,8 @@ class CharactersController < ApplicationController
 			@wis += 1
 			@cha += 1
 			@age = rand(16..100)
+			calculate_height(rand(60..76))
+			@weight = rand(125..250)
 		#for the moment, there is only Mountain Dwarf. Mountain Dwarf is king.
 		elsif (@race.name == "Dwarf")
 			@name = DwarfName.choosename(@m, @f, @n)
@@ -650,6 +652,8 @@ class CharactersController < ApplicationController
 			@dex += 2
 			@int += 1
 			@age = rand(100..750)
+			calculate_height(rand(52..62))
+			@weight = rand(100..145)			
 		end #end if race
 	end #end modify_by_race
 
