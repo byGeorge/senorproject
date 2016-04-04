@@ -75,8 +75,13 @@
 				<dt>Charisma:</dt><dd><%= @cha %></dd>
 			</dl>
 		</div><!-- end div abilities -->
-	<p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
-	<br>
-	or you can <a href="/view">view</a> or <a href="/print">print</a> a character.
-	</p>
+	</div><!-- end div column_box -->
+	<div id="footer">
+		<p>
+			<a href='/welcome/index'><button>Go home</button></a>
+			<a href='/characters/new'><button>Create another character</button></a>
+			<a href="/characters/view"><button>View another NPC</button></a>
+			<a href="/print"><button>Print this NPC</button></a>
+		</p>
+	</div><!-- end div footer -->
 </div> <!-- end div everything -->

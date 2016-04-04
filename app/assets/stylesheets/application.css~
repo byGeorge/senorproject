@@ -15,6 +15,11 @@
  */
 @import url(/stylesheets/OpenDyslexicWeb/stylesheet.css);
 
+body {
+	background: url("/images/bg.png") no-repeat center center;
+	background-size: 100%;
+}
+
 #everything {
 	font-family: opendyslexic;
 }
@@ -25,6 +30,7 @@
 
 .column_box {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .column_third {
@@ -32,6 +38,10 @@
 	margin-left: 1rem;
 	margin-right: 1rem;
 	min-width: 16rem;
+}
+
+#footer {
+	text-align: center;
 }
 
 	
