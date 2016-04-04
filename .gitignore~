@@ -18,4 +18,4 @@
 
 #DON'T SEND PASSWORDS TO GITHUB
 .env
-/config/database.yml
+
