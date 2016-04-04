@@ -3,8 +3,8 @@
 		<h1><%= @name %> </h1>
 		<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
 	</div>
-	<div id="column_box">
-		<div id="column_third">
+	<div class="column_box">
+		<div class="column_third">
 			<h3>Skills: </h3>
 			<dl>
 				<dt>Acrobatics:</dt><dd><%= @acrobatics %></dd>
@@ -27,7 +27,7 @@
 				<dt>Survival:</dt><dd><%= @survival %></dd>
 			</dl>
 		</div><!-- end div column_third (skills) -->
-		<div id="column_third">
+		<div class="column_third">
 			<h4>Hit points: <%= @hp %></h4>
 			<h5>Weapon Proficiency <%= @wpn_prof %></h5>
 			<% if @c_class.name == "Barbarian" %>
@@ -61,7 +61,7 @@
 				</dl>
 			<% end %>
 		</div><!-- end div column_third (combat) -->
-		<div id="column_third">
+		<div class="column_third">
 			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
 			Quirks: <%= @appearance %>
 		</div><!-- end div column_third (appearances) !>
@@ -75,6 +75,7 @@
 				<dt>Charisma:</dt><dd><%= @cha %></dd>
 			</dl>
 		</div><!-- end div abilities -->
+	</div><!-- end div column_box -->
 	<p><a href='/welcome/index'>Go home</a> or <a href='/new'>go back.</a>
 	<br>
 	or you can <a href="/view">view</a> or <a href="/print">print</a> a character.

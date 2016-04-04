@@ -25,7 +25,6 @@
 
 .column_box {
 	display: flex;
-	flex-wrap: wrap;
 }
 
 .column_third {

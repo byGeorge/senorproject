@@ -3,8 +3,8 @@
 		<h1><%= @name %> </h1>
 		<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
 	</div>
-	<div id="column_box">
-		<div id="column_third">
+	<div class="column_box">
+		<div class="column_third">
 			<h3>Skills: </h3>
 			<dl>
 				<dt>Acrobatics:</dt><dd><%= @acrobatics %></dd>
@@ -27,14 +27,16 @@
 				<dt>Survival:</dt><dd><%= @survival %></dd>
 			</dl>
 		</div><!-- end div column_third (skills) -->
-		<div id="column_third">
+		<div class="column_third">
 			<h4>Hit points: <%= @hp %></h4>
 			<h5>Weapon Proficiency <%= @wpn_prof %></h5>
 			<% if @c_class.name == "Barbarian" %>
 				<h4>Rages: <%= @rage %></h4>
 				<h5>Rage Damage Bonus: <%= @rage_dmg %></h5>
 			<% elsif @c_class.name == "Bard" || @c_class.name == "Cleric" || @c_class.name == "Druid" %>
-				<h4>Total spells known: <%= @spells_known %></h4>
+				<% if @c_class.name == "Bard" %>
+					<h4>Total spells known: <%= @spells_known %></h4>
+				<% end %>
 				<dl>
 					<dt>Cantrips: <%= @spells[0] %></dt>
 					<dd><%= @spells_list.select {|spell| spell.level == 0 }.map(&:spell).join(', ') %></dd>
@@ -59,7 +61,7 @@
 				</dl>
 			<% end %>
 		</div><!-- end div column_third (combat) -->
-		<div id="column_third">
+		<div class="column_third">
 			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
 			Quirks: <%= @appearance %>
 		</div><!-- end div column_third (appearances) !>
