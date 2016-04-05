@@ -1,3 +1,10 @@
-<h1>Log in</h1>
-<p>this will be a form
-<br> <a href="/views/logged.html.erb">back</a></p>
+<div id="everything">
+	<div id="header">
+		<h1>Log in</h1>
+	</div><!-- end div header -->
+	<p>this will be a form
+	<div id="footer">
+			<a href='/welcome/index'><button>Home</button></a>
+			<a href='/characters/new'><button>Create a character</button></a>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->

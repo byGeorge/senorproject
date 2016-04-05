@@ -32,7 +32,6 @@
 			<a href='/welcome/index'><button>Home</button></a>
 			<a href='/characters/new'><button>Reset Form</button></a>
 			<a href="/characters/view"><button>View your NPCs</button></a>
-			<a href="/print"><button>Print this NPC</button></a>
 		</p>
 	</div><!-- end div footer -->
 </div><!-- end div everything -->

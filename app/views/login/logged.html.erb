@@ -1,2 +1,22 @@
-<h1> login successful! </h1>
-<p> just kidding, no it wasn't. <a href="/form">Go big</a> or <a href="welcome/index">go home</a></p>
+<div id="everything">
+	<div id="header">
+		<% if @login_token == 0 %>
+			<h1>Login unsuccessful</h1>
+		<% else %>
+			<h1> You are logged in as <%= @user %> </h1>
+		<% end %><!-- end if else -->
+	</div>
+	<div>
+		<p> just kidding, no it wasn't.</p>
+	</div>
+	<div id="footer">
+		<p>
+			<a href='/welcome/index'><button>Home</button></a>
+			<a href='/characters/new'><button>Create a new NPC</button></a>
+			<a href="/characters/view"><button>View your NPCs</button></a>
+		</p>
+		<p> 
+			The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.
+		</p>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->

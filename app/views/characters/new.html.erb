@@ -1,37 +1,42 @@
 <div id="everything">
 	<div id="header">
 		<h1>Create a character</h1>
-	</div><!-- end div header --!>
-	<%= form_tag({controller: "characters", action: "preview"}, method: "get") do %>
-		<p>
-			<label for="race">Race</label>:
-			<%= collection_select(:race, :race_id, Race.all, :id, :name, {prompt: "Random"}) %>
-		</p>
-		<p>
-			<label for="gender">Gender</label>: 
-			<%= check_box_tag(:m) %>
-			<%= label_tag(:m, "Male") %>
-			<%= check_box_tag(:f) %>
-			<%= label_tag(:f, "Female") %>
-			<%= check_box_tag(:n) %>
-			<%= label_tag(:n, "Aren't we past all that gender nonsense?") %>
-		</p>
-		<p>
-			<%= label_tag(:lvl, "Level:") %>
-			<%= select_tag(:lvl, options_for_select(1..20), {prompt: "Random"}) %>
-		</p>
-		<p>
-			<label for="c_class">Class</label>:
-			<%= collection_select(:c_class, :class_id, CClass.all, :id, :name, {prompt: "Random"}) %>
-		</p>
-		<%= submit_tag("Create Character") %>
+	</div><!-- end div header -->
+	<div class="form">
+		<%= form_tag({controller: "characters", action: "preview"}, method: "get") do %>
+			<p>
+				<label for="race">Race</label>:
+				<%= collection_select(:race, :race_id, Race.all, :id, :name, {prompt: "Random"}) %>
+			</p>
+			<p>
+				<label for="gender">Gender</label>: 
+				<%= check_box_tag(:m) %>
+				<%= label_tag(:m, "Male") %>
+				<%= check_box_tag(:f) %>
+				<%= label_tag(:f, "Female") %>
+				<%= check_box_tag(:n) %>
+				<%= label_tag(:n, "Aren't we past all that gender nonsense?") %>
+			</p>
+			<p>
+				<%= label_tag(:lvl, "Level:") %>
+				<%= select_tag(:lvl, options_for_select(1..20), {prompt: "Random"}) %>
+			</p>
+			<p>
+				<label for="c_class">Class</label>:
+				<%= collection_select(:c_class, :class_id, CClass.all, :id, :name, {prompt: "Random"}) %>
+			</p>
+			<%= submit_tag("Create Character") %>
 		<% end %>
+	</div><!-- end div form -->
 	<div id="footer">
-		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.</p>
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
 			<a href='/characters/new'><button>Reset Form</button></a>
 			<a href="/characters/view"><button>View your NPCs</button></a>
+			<a href='/login'><button>Log in</button></a>
+		</p>
+		<p> 
+			The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.
 		</p>
 	</div><!-- end div footer -->
 </div><!-- end div everything -->

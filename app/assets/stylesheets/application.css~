@@ -52,6 +52,14 @@ body {
 	margin-right: 4rem;
 }
 
+.inline {
+	dt {
+		float: left;
+		clear: left;
+		width: 10rem;
+	}
+}
+
 .ability {
 	margin-left: 2rem;
 	margin-right: 2rem;
@@ -68,13 +76,4 @@ body {
 	margin-bottom: 6rem;
 }
 
-dt.inline {
-	float: left;
-	clear: left;
-	width: 10rem;
-}
-
-dd {
-
-}
 	
