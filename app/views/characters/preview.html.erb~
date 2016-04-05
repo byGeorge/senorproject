@@ -7,24 +7,24 @@
 		<div class="column_third">
 			<h3>Skills: </h3>
 			<dl>
-				<dt>Acrobatics:</dt><dd><%= @acrobatics %></dd>
-				<dt>Animal Handling:</dt><dd><%= @animal_h %></dd>
-				<dt>Arcana:</dt><dd><%= @arcana %></dd>
-				<dt>Athletics:</dt><dd><%= @athletics %></dd>
-				<dt>Deception:</dt><dd><%= @deception %></dd>
-				<dt>History:</dt><dd><%= @history %></dd>
-				<dt>Insight:</dt><dd><%= @insight %></dd>
-				<dt>Intimidation:</dt><dd><%= @intimidation %></dd>
-				<dt>Investigation:</dt><dd><%= @investigation %></dd>
-				<dt>Medicine:</dt><dd><%= @medicine %></dd>
-				<dt>Nature:</dt><dd><%= @nature %></dd>
-				<dt>Perception:</dt><dd><%= @perception %></dd>
-				<dt>Performance:</dt><dd><%= @performance %></dd>
-				<dt>Persuasion:</dt><dd><%= @persuasion %></dd>
-				<dt>Religion:</dt><dd><%= @religion %></dd>
-				<dt>Sleight of Hand:</dt><dd><%= @sleight_o_hand %></dd>
-				<dt>Stealth:</dt><dd><%= @stealth %></dd>
-				<dt>Survival:</dt><dd><%= @survival %></dd>
+				<dt>Acrobatics:</dt><dd><%= @acrobatics + (@dex-10)/2 %></dd>
+				<dt>Animal Handling:</dt><dd><%= @animal_h + (@wis-10)/2 %></dd>
+				<dt>Arcana:</dt><dd><%= @arcana + (@int-10)/2 %></dd>
+				<dt>Athletics:</dt><dd><%= @athletics + (@str-10)/2 %></dd>
+				<dt>Deception:</dt><dd><%= @deception + (@cha-10)/2 %></dd>
+				<dt>History:</dt><dd><%= @history + (@int-10)/2 %></dd>
+				<dt>Insight:</dt><dd><%= @insight + (@wis-10)/2 %></dd>
+				<dt>Intimidation:</dt><dd><%= @intimidation + (@cha-10)/2 %></dd>
+				<dt>Investigation:</dt><dd><%= @investigation + (@int-10)/2 %></dd>
+				<dt>Medicine:</dt><dd><%= @medicine + (@wis-10)/2 %></dd>
+				<dt>Nature:</dt><dd><%= @nature + (@int-10)/2 %></dd>
+				<dt>Perception:</dt><dd><%= @perception + (@wis-10)/2 %></dd>
+				<dt>Performance:</dt><dd><%= @performance + (@cha-10)/2 %></dd>
+				<dt>Persuasion:</dt><dd><%= @persuasion + (@cha-10)/2 %></dd>
+				<dt>Religion:</dt><dd><%= @religion + (@int-10)/2 %></dd>
+				<dt>Sleight of Hand:</dt><dd><%= @sleight_o_hand + (@dex-10)/2 %></dd>
+				<dt>Stealth:</dt><dd><%= @stealth + (@dex-10)/2 %></dd>
+				<dt>Survival:</dt><dd><%= @survival + (@wis-10)/2 %></dd>
 			</dl>
 		</div><!-- end div column_third (skills) -->
 		<div class="column_third">
@@ -62,25 +62,36 @@
 			<% end %>
 		</div><!-- end div column_third (combat) -->
 		<div class="column_third">
-			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds </p>
-			Quirks: <%= @appearance %>
-		</div><!-- end div column_third (appearances) !>
-		<div id="abilities">
-			<dl>
-				<dt>Strength:</dt><dd><%= @str %></dd>
-				<dt>Dexterity:</dt><dd><%= @dex %></dd>
-				<dt>Constitution:</dt><dd><%= @con %></dd>
-				<dt>Intelligence:</dt><dd><%= @int %></dd>
-				<dt>Wisdom:</dt><dd><%= @wis %></dd>
-				<dt>Charisma:</dt><dd><%= @cha %></dd>
-			</dl>
-		</div><!-- end div abilities -->
+			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds</p>
+			<p>Quirks: <%= @appearance %></p>
+		</div><!-- end div column_third (appearances) -->
 	</div><!-- end div column_box -->
+	<div class="abilities_box">
+		<div class="ability">
+			STR <%= @str %>
+		</div>
+		<div class="ability">
+			DEX <%= @dex %>
+		</div>
+		<div class="ability">
+			CON <%= @con %>
+		</div>
+		<div class="ability">
+			INT <%= @int %>
+		</div>
+		<div class="ability">
+			WIS <%= @wis %>
+		</div>
+		<div class="ability">
+			CHA <%= @cha %>
+		</div>
+	</div><!-- end div abilities_box -->
 	<div id="footer">
+		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.</p>
 		<p>
 			<a href='/welcome/index'><button>Go home</button></a>
 			<a href='/characters/new'><button>Create another character</button></a>
-			<a href="/characters/view"><button>View another NPC</button></a>
+			<a href="/characters/view"><button>View your NPCs</button></a>
 			<a href="/print"><button>Print this NPC</button></a>
 		</p>
 	</div><!-- end div footer -->

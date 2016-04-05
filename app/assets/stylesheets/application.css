@@ -18,6 +18,7 @@
 body {
 	background: url("/images/bg.png") no-repeat bottom right;
 	background-size: 100%;
+	background-color: #fdfaf5;
 }
 
 #everything {
@@ -29,19 +30,50 @@ body {
 }
 
 .column_box {
+	margin-left: 3rem;
+	margin-right: 3rem;
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .column_third {
 	flex: 1;
-	margin-left: 1rem;
-	margin-right: 1rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
 	min-width: 16rem;
+}
+
+.abilities_box {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-basis: 1;
+	margin-left: 4rem;
+	margin-right: 4rem;
+}
+
+.inline {
+	dt {
+		float: left;
+		clear: left;
+		width: 10rem;
+	}
+}
+
+.ability {
+	margin-left: 2rem;
+	margin-right: 2rem;
+	font-size: 150%;
+	border-style: inset;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: 0;
+	text-align: center;
 }
 
 #footer {
 	text-align: center;
+	margin-bottom: 6rem;
 }
 
 	

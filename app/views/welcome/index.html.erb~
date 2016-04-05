@@ -1,5 +1,13 @@
-<h1>Welcome to George Hanley's NPC Generator!</h1>
-<p>Please choose an option:
-
-<a href="/login"> log in </a>, <a href="/form"> create a character </a></p>, 
-or <a href="/view">view</a> previously created characters.
+<div id="everything">
+	<div id="header">
+		<h1>Welcome to George Hanley's NPC Generator!</h1>
+	</div><!-- end div header -->
+	<div id="footer">
+		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.</p>
+		<p>
+			<a href='/welcome/index'><button>Go home</button></a>
+			<a href='/characters/new'><button>Create a character</button></a>
+			<a href="/characters/view"><button>View your NPCs</button></a>
+		</p>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->

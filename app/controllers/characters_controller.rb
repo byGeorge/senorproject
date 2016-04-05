@@ -41,25 +41,25 @@ class CharactersController < ApplicationController
 	#that the person is a very bad liar.
 	def generate_skills(lvl)
 		temp2 = 0 #this is a variable that will always be assigned to a random number
-		#calculate skills without ranks
-		@acrobatics = (@dex - 10)/2 
-		@arcana = (@int - 10)/2 
-		@animal_h = (@wis - 10)/2
-		@athletics = (@str - 10)/2 
-		@deception = (@cha - 10)/2 
-		@history = (@int - 10)/2 
-		@insight = (@wis - 10)/2 
-		@intimidation = (@cha - 10)/2
-		@investigation = (@int - 10)/2 
-		@medicine = (@wis - 10)/2 
-		@nature = (@int - 10)/2
-		@perception = (@wis - 10)/2 
-		@performance = (@cha - 10)/2 
-		@persuasion = (@cha - 10)/2 
-		@religion = (@int - 10)/2 
-		@sleight_o_hand = (@dex - 10)/2 
-		@stealth = (@wis - 10)/2 
-		@survival = (@wis - 10)/2 
+		#initialize all skills to zero. ability bonus will be added when number is displayed
+		@acrobatics = 0 
+		@arcana = 0
+		@animal_h = 0
+		@athletics = 0
+		@deception = 0
+		@history = 0 
+		@insight = 0 
+		@intimidation = 0
+		@investigation = 0 
+		@medicine = 0
+		@nature = 0
+		@perception = 0
+		@performance = 0 
+		@persuasion = 0
+		@religion = 0
+		@sleight_o_hand = 0 
+		@stealth = 0
+		@survival = 0
 		#weapons proficiency bonus
 		@wpn_prof = 2
 		if @c_class.name == "Barbarian"
@@ -407,9 +407,8 @@ class CharactersController < ApplicationController
 
 	#levels up character
 	def level_up(lvl)
-		skills = [0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
+		increase_abl if lvl % 4 == 1
 		if @c_class.name == "Barbarian"
-			increase_abl
 			#hit points increase 7 + con mod per level
 			@hp += (7 + (@con - 10) / 2)
 			#barbarian can rage one more time at levels 3, 6, 12, and 17
@@ -420,21 +419,18 @@ class CharactersController < ApplicationController
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
 		elsif @c_class.name == "Bard"
-			increase_abl
 			#hit points increase 5 + con mod per level
 			@hp += (5 + (@con - 10) / 2)
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
 			level_spells(lvl)
 		elsif @c_class.name == "Cleric"
-			increase_abl
 			#hit points increase 8 + con mod per level
 			@hp += (8 + (@con - 10) / 2)
 			#better at weapons at 5th, 9th, 13th, and 17th levels
 			@wpn_prof += 1 if lvl % 4 == 1
 			level_spells(lvl)
 		elsif @c_class.name == "Druid"
-			increase_abl
 			#hit points increase 8 + con mod per level
 			@hp += (8 + (@con - 10) / 2)
 			level_spells(lvl)
@@ -458,28 +454,10 @@ class CharactersController < ApplicationController
 		elsif @c_class.name == "Wizard"
 
 		end #end if class
-		@acrobatics = skills[0] 
-		@arcana = skills[1]
-		@animal_h = skills[2]
-		@athletics = skills[3]
-		@deception = skills[4]
-		@history = skills[5]
-		@insight = skills[6]
-		@intimidation = skills[7]
-		@investigation = skills[8]
-		@medicine = skills[9]
-		@nature = skills[10]
-		@perception = skills[11]
-		@performance = skills[12]
-		@persuasion = skills[13]
-		@religion = skills[14]
-		@sleight_o_hand = skills[15]
-		@stealth = skills[16]
-		@survival = skills[17]
 	end #end level up
 
 
-	#initializes and modifies abilities
+	#initializes and modifies abilities and skills
 	def modify_by_class(stat)
 		if @c_class.name == "Barbarian"
 			@str = stat[5]
@@ -618,6 +596,24 @@ class CharactersController < ApplicationController
 			@wis = stat[2]
 			@cha = stat[3]
 		end #end if class
+		@acrobatics = 0
+		@arcana = 0
+		@animal_h = 0
+		@athletics = 0
+		@deception = 0
+		@history = 0
+		@insight = 0
+		@intimidation = 0
+		@investigation = 0
+		@medicine = 0
+		@nature = 0
+		@perception = 0
+		@performance = 0
+		@persuasion = 0
+		@religion = 0
+		@sleight_o_hand = 0
+		@stealth = 0
+		@survival = 0
 		stat #return statement
 	end #end modify by class
 
@@ -656,6 +652,10 @@ class CharactersController < ApplicationController
 			@weight = rand(100..145)			
 		end #end if race
 	end #end modify_by_race
+
+	def modify_skills
+
+	end #end modify skills
 
 	#generates all the data for the preview page
 	def preview
