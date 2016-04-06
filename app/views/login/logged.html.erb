@@ -3,12 +3,17 @@
 		<% if @login_token == 0 %>
 			<h1>Login unsuccessful</h1>
 		<% else %>
-			<h1> You are logged in as <%= @user %> </h1>
+			<h1> You are logged in as <%= @user.name %> </h1>
 		<% end %><!-- end if else -->
 	</div>
-	<div>
-		<p> just kidding, no it wasn't.</p>
-	</div>
+		<% if @login_token == 0 %>
+			<% if @user %>
+				<p>Your username and password do not match.</p>
+			<% else %>
+				<p>Your username was not found.</p>
+			<% end %><!-- end if username found -->
+			<a href='/login'><button>Try again</button></a>
+		<% end %><!-- end if login token is 0 -->
 	<div id="footer">
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
