@@ -4,6 +4,6 @@ class LoginController < ApplicationController
 		usr = params[:username]
 		pwd = params[:password]
 		@user = User.find_by_name(usr)
-		@login_token = 1 unless usr == nil || !pwd.eql?(@user.password)
+		@login_token = 1 unless @user == nil || !pwd.eql?(@user.password)
 	end
 end

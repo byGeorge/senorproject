@@ -26,14 +26,18 @@
 				<%= collection_select(:c_class, :class_id, CClass.all, :id, :name, {prompt: "Random"}) %>
 			</p>
 			<%= submit_tag("Create Character") %>
-		<% end %>
+		<% end %><!-- end form_tag -->
 	</div><!-- end div form -->
 	<div id="footer">
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
 			<a href='/characters/new'><button>Reset Form</button></a>
 			<a href="/characters/view"><button>View your NPCs</button></a>
-			<a href='/login'><button>Log in</button></a>
+			<% if session[:user] %>
+				<a href='/login/logout'><button>Log out</button></a>
+			<% else %>
+				<a href='/login'><button>Log in</button></a>
+			<% end %>
 		</p>
 		<p> 
 			The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.

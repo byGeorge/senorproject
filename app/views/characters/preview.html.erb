@@ -92,7 +92,11 @@
 			<a href='/characters/new'><button>Create another NPC</button></a>
 			<a href="/characters/view"><button>View your NPCs</button></a>
 			<a href="/print"><button>Print this NPC</button></a>
-			<a href='/login'><button>Log in</button></a>
+			<% if session[:user] %>
+				<a href='/login/logout'><button>Log out</button></a>
+			<% else %>
+				<a href='/login'><button>Log in</button></a>
+			<% end %>
 		</p>
 		<p> 
 			The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.

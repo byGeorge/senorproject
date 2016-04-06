@@ -11,22 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329043524) do
+ActiveRecord::Schema.define(version: 20160406011053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appearances", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "blurbs", force: :cascade do |t|
-    t.string  "text",              limit: 1028
-    t.integer "lvl_requirement"
-    t.string  "class_requirement", limit: 16
-    t.string  "race_requirement"
-    t.string  "type_requirement"
+    t.string "races",       limit: 64
+    t.string "classes",     limit: 64
+    t.string "statreq",     limit: 1024
+    t.string "description", limit: 1024
+    t.string "category",    limit: 32
   end
 
   create_table "c_classes", force: :cascade do |t|
@@ -99,6 +94,11 @@ ActiveRecord::Schema.define(version: 20160329043524) do
     t.string "name", limit: 10
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "spells", force: :cascade do |t|
     t.integer "level"
     t.string  "spell",  limit: 50
@@ -106,7 +106,8 @@ ActiveRecord::Schema.define(version: 20160329043524) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", limit: 20
+    t.string "name",     limit: 32
+    t.string "password", limit: 64
   end
 
   add_index "users", ["name"], name: "users_name_key", unique: true, using: :btree
