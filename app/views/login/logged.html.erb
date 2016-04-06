@@ -24,14 +24,15 @@
 					</p>
 					<p>
 						<%= submit_tag("Log in") %>
-						<a href='login/create'><button>New User</button></a>
 					</p>
 					<p>
 						The character limit for usernames and passwords is 32 characters. Any characters over this limit will be ignored.
 					</p>
+					<p>
+						<a href='/login/create'><button>New User</button></a>
+					</p>
 				<% end %>
 			</div><!-- end div form -->
-			<a href='/login'><button>Try again</button></a>
 		<% else %>
 			<% session[:user] = @user.id %>
 		<% end %><!-- end if/else login token is 0 -->

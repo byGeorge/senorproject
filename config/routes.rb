@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   get 'race/list'
   get 'login/index'
   get 'login/logout'
+  get 'login/new'
   resources :login do
   	collection do
   		get 'logged'
       resources :logout
+      resources :new
   	end
   end
   resources :characters do

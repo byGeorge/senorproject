@@ -1,0 +1,62 @@
+<div id="everything">
+	<div id="header">
+		<% if @login_token == 1 %>
+			<h1> User creation successful! </h1>
+		<% else %>
+			<h1> Please choose a user name and password </h1>
+		<% end %>
+	</div><!-- end div header -->
+	<% if @login_token == 0 || @login_token == nil %>
+		<div class="form">
+				<%= form_tag({controller: "login", action: "new"}, method: "get") do %>
+			<p>
+				<% if @messageu %>
+					<%= @messageu %></p><p>
+				<% end %>
+				<%= label_tag(:usr, "User Name:") %>
+				<%= text_field_tag(:usr) %>
+			</p>
+			<p>
+				<% if @messagep %>
+					<%= @messagep %></p><p>
+				<% end %>
+				<%= label_tag(:pwd, "Password:") %>
+				<%= password_field_tag(:pwd, value = nil, size: 32) %>
+			</p>
+			<p>
+				<%= label_tag(:pw2, "Confirm password:") %>
+				<%= password_field_tag(:pw2, value = nil, size: 32) %>
+			</p>
+			<p>
+				<%= submit_tag("Register") %>
+			</p>
+		<% end %>
+			<p>
+				The character limit for usernames and passwords is 32 characters. Any characters over this limit will be ignored.
+			</p>
+		</div><!-- end div form -->
+	<% else %>
+		<div>
+			<p>
+				Congratulations, <%= @user.name unless @user == nil %>. You may now save your NPCs so that you can refer to them later. Please log in to begin using your account.
+			</p>
+			<div class="centered">
+				<p>
+					<a href='/login'><button>Log in</button></a>
+				</p>
+			</div>
+		</div>
+	<% end %><!-- end if login -->
+	<div id="footer">
+		<p>
+			<a href='/welcome/index'><button>Home</button></a>
+			<a href='/characters/new'><button>Create a new NPC</button></a>
+			<% if @login_token == 1 %>
+					<a href="/characters/view"><button>View your NPCs</button></a>
+			<% end %>
+		</p>
+		<p> 
+			The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.
+		</p>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->
