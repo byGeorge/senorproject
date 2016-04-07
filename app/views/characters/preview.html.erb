@@ -87,14 +87,22 @@
 		</div>
 	</div><!-- end div abilities_box -->
 	<div class="center">
-
+		<p>
+			<% if session[:user] %>
+				<%= form_tag({controller: "characters", action: "save"}, method: "post") do %>
+					<%= submit_tag("Save NPC") %>
+					<a href='/characters/new'><button>Create another NPC</button></a>
+					<a href="/print"><button>Print this NPC</button></a>
+				<% end %>					
+			<% end %>
+		</p>
 	</div><!-- end div center -->
 	<div id="footer">
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
-			<a href='/characters/new'><button>Create another NPC</button></a>
+
 			<a href="/characters/view"><button>View your NPCs</button></a>
-			<a href="/print"><button>Print this NPC</button></a>
+
 			<% if session[:user] %>
 				<a href='/login/logout'><button>Log out</button></a>
 			<% else %>

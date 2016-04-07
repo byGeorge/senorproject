@@ -557,4 +557,8 @@ class CharactersController < ApplicationController
 	def random?(obj)
 		obj == "Random" || obj == nil
 	end
+
+	def save
+		
+	end
 end
