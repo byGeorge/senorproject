@@ -551,6 +551,17 @@ class CharactersController < ApplicationController
 		modify_by_race
 		generate_skills(@lvl)
 		@appearance = Appearance.generate
+		#saving relevant data to string
+		char_temp = @name + "|" + @lvl.to_s + "|" + @race.id.to_s + "|" + 
+			@str.to_s + "|" + @dex.to_s + "|" + @con.to_s + "|" + 
+			@int.to_s + "|" +@wis.to_s + "|" + @cha.to_s + "|" + 
+			@c_class.id.to_s + "|" + @hp.to_s + "|" + @appearance + "|" +
+			@height.to_s + " " + @weight.to_s + " " + @age.to_s + "|"
+		@spells_list.each do |spell|
+			char_temp = char_temp + "," + spell.id.to_s
+		end
+		#putting string into cooookie
+		session[:character] = char_temp
 	end #end preview
 
 	#Determines if object is random
@@ -558,22 +569,38 @@ class CharactersController < ApplicationController
 		obj == "Random" || obj == nil
 	end
 
-	def save
-		Character.create do |c|
-			c.userid = @user.id
-			c.name = @name
-			c.level = @lvl
-			c.race = @race.id
-			c.strength = @str
-			c.dexterity = @dex
-			c.constitution = @con
-			c.intelligence = @int
-			c.wisdom = @wis
-			c.charisma = @cha
-			c.cclass = @c_class.id
-			c.spells_list = @spells_list
-			c.hit_points = @hp
-			c.quirks = @appearance
-			c.height_weight_age = @height + " " + @weight + " " + @age
+	#saves data to Character
+	def create
+		binding.pry
+		#retrieves data from cookie (om nom nom)
+		char_temp = session[:character].split('|').reverse!
+		@npc = Character.create do |c|
+			c.userid = session[:user]
+			c.name = char_temp.pop
+			c.level = char_temp.pop
+			c.race = char_temp.pop
+			c.strength = char_temp.pop
+			c.dexterity = char_temp.pop
+			c.constitution = char_temp.pop
+			c.intelligence = char_temp.pop
+			c.wisdom = char_temp.pop
+			c.charisma = char_temp.pop
+			c.cclass = char_temp.pop
+			c.hit_points = char_temp.pop
+			c.quirks = char_temp.pop
+			c.height_weight_age = char_temp.pop
+			spells_list = Array.new
+			spells_list.push(char_temp.each)
+			c.spells_list = spells_list
+		end
+		#we don't need to store all that crap in the cookie anymore, just need the id now
+		session[:character] = @npc.id
+	end
+	def index
+		current_npc = Character.find_by_id(session[:character])
+	end
+
+	def update
+		session[:character] = @character.id
 	end
 end

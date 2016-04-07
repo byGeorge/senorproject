@@ -89,12 +89,10 @@
 	<div class="center">
 		<p>
 			<% if session[:user] %>
-				<%= form_tag({controller: "characters", action: "save"}, method: "post") do %>
-					<%= submit_tag("Save NPC") %>
-					<a href='/characters/new'><button>Create another NPC</button></a>
-					<a href="/print"><button>Print this NPC</button></a>
-				<% end %>					
+				<%= button_to "Save this NPC", {controller: "characters", action: "create"}, method: "get" %>					
 			<% end %>
+			<a href='/characters/new'><button>Create another NPC</button></a>
+			<a href="/print"><button>Print this NPC</button></a>
 		</p>
 	</div><!-- end div center -->
 	<div id="footer">

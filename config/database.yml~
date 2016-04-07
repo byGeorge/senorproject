@@ -1,49 +1,49 @@
- -# He cambiado esto a Postgres porque Heroku me duele en los nalgas y no
--# usa SQLite. Diosa, espero que functiona...
--#
--# Changed to Postgres because Heroku doesn't support SQLite.
--#
--
--# default: &default
--#   adapter: sqlite3
--#   pool: 5
--#   timeout: 5000
--
--default: &default
--  adapter: postgresql
--  encoding: unicode
--  pool: 5
--  username: fhhiddclifirmw
--  password: 82gXTyhh9qZlc4G9F6cGU_PWzv
--  host: "ec2-54-235-170-124.compute-1.amazonaws.com"
--  database: dd9ok764mc3i63
--  port: 5432
--  sslmode: require
--
--# development:
--#   <<: *default
--#   database: db/development.sqlite3
--
--development:
--  <<: *default
--#   database: bygeorge_development
--
--# Warning: The database defined as "test" will be erased and
--# re-generated from your development database when you run "rake".
--# Do not set this db to the same as development or production.
--
--#test:
--#  <<: *default
--#  database: db/test.sqlite3
--
--test:
--  <<: *default
--  database: bygeorge_test
--
--#production:
--#  <<: *default
--#   database: db/production.sqlite3
--
--production:
--   <<: *default
--#   database: bygeorge_production
+# He cambiado esto a Postgres porque Heroku me duele en los nalgas y no
+# usa SQLite. Diosa, espero que functiona...
+#
+# Changed to Postgres because Heroku doesn't support SQLite.
+#
+
+# default: &default
+#   adapter: sqlite3
+#   pool: 5
+#   timeout: 5000
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: fhhiddclifirmw
+  password: 1EatbabiesandyerMaMatooB=D
+  host: "ec2-54-235-170-124.compute-1.amazonaws.com"
+  database: dd9ok764mc3i63
+  port: 5432
+  sslmode: require
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
+
+development:
+  <<: *default
+#   database: bygeorge_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+
+#test:
+#  <<: *default
+#  database: db/test.sqlite3
+
+test:
+  <<: *default
+  database: bygeorge_test
+
+#production:
+#  <<: *default
+#   database: db/production.sqlite3
+
+production:
+   <<: *default
+#   database: bygeorge_production
