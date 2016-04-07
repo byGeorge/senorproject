@@ -34,64 +34,15 @@ class CharactersController < ApplicationController
 		stat.sort!
 	end
 
-	#generates skill scores. Method must be run after abl_modify_by_class
-	#because it needs ability stats to work
-	#skill = skill level + ability mod (ability -10, then divided by two)
-	#negative skills are possible. A negative score in, say, deception means
-	#that the person is a very bad liar.
+	#generates special skills for the class, like spells and rages
 	def generate_skills(lvl)
-		temp2 = 0 #this is a variable that will always be assigned to a random number
-		#initialize all skills to zero. ability bonus will be added when number is displayed
-		@acrobatics = 0 
-		@arcana = 0
-		@animal_h = 0
-		@athletics = 0
-		@deception = 0
-		@history = 0 
-		@insight = 0 
-		@intimidation = 0
-		@investigation = 0 
-		@medicine = 0
-		@nature = 0
-		@perception = 0
-		@performance = 0 
-		@persuasion = 0
-		@religion = 0
-		@sleight_o_hand = 0 
-		@stealth = 0
-		@survival = 0
-		#weapons proficiency bonus
 		@wpn_prof = 2
 		if @c_class.name == "Barbarian"
-			#favoured skills are animal handling, athletics,
-			#intimidation, nature, perception, and survival
-			skills = [0,0,0,0,0,0]
-			temp = rand(0..5)
-			skills[temp] += 1
-			#ranks in skill cannot exceed level
-			temp2 = rand(0..5) until temp != temp2
-			skills[temp2] += 1
-			@animal_h += skills[0]
-			@athletics += skills[1]
-			@intimidation += skills[2]
-			@nature += skills[3]
-			@perception += skills[4]
-			@survival += skills[5]
 			#special skills
 			@rage = 2
 			@rage_dmg = 2
 			#description of appearance
 		elsif @c_class.name == "Bard"
-			#one point goes to performance, the other to
-			#history, persuasion, sleight of hand, acrobatics, or religion
-			@performance += 1
-			skills = [0,0,0,0,0]
-			skills[rand(0..4)] += 1
-			@acrobatics += skills[0]
-			@history += skills[1]
-			@persuasion += skills[2]
-			@religion += skills[3] + (@int - 10)/2 
-			@sleight_o_hand += skills[4]
 			#special skills
 			@spells_known = 4
 			#picks random spells
@@ -99,28 +50,12 @@ class CharactersController < ApplicationController
 			2.times { Spell.pick_spell(0, @spells_list, "Bard") } 
 			4.times { Spell.pick_spell(1, @spells_list, "Bard") }
 		elsif @c_class.name == "Cleric"
-			#one point goes to medicine, the other to religion
-			@medicine += 1
-			@religion += 1
 			#special skills
 			#picks random spells
 			@spells_list = Array.new
 			3.times { Spell.pick_spell(0, @spells_list, "Cleric") } 
 			Spell.pick_spell(1, @spells_list, "Cleric")
 		elsif @c_class.name == "Druid"
-			#favoured skills are animal handling, medicine,
-			#nature, perception, and survival
-			skills = [0,0,0,0,0]
-			temp = rand(0..4)
-			skills[temp] += 1
-			#ranks in skill cannot exceed level
-			temp2 = rand(0..4) until temp != temp2
-			skills[temp2] += 1
-			@animal_h += skills[0]
-			@medicine += skills[1]
-			@nature += skills[2]
-			@perception += skills[3]
-			@survival += skills[4]
 			#special skills
 			#picks random spells
 			@spells_list = Array.new
@@ -128,54 +63,11 @@ class CharactersController < ApplicationController
 			Spell.pick_spell(1, @spells_list, "Bard")
 		# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
-			#favored skills are athletics and perception
-			@athletics += 1
-			@perception += 1
 		elsif @c_class.name == "Monk"
-			#favoured skills are acrobatics and athletics 
-			@acrobatics += 1
-			@athletics += 1
 		elsif @c_class.name == "Paladin"
-			#favoured skills are intimidation, athletics, and perception
-			skills = [0,0,0]
-			temp = rand(0..2)
-			skills[temp] += 1
-			#ranks in skill cannot exceed level
-			temp2 = rand(0..2) until temp != temp2
-			skills[temp2] += 1
-			@athletics += skills[0]
-			@intimidation += skills[1]
-			@perception += skills[2]
 		elsif @c_class.name == "Ranger"
-			@nature += 1
-			@survival += 1
 		elsif @c_class.name == "Rogue"
-			#favoured skills are deception, perception, 
-			#stealth, and sleight of hand
-			skills = [0,0,0,0]
-			temp = rand(0..3)
-			skills[temp] += 1
-			#ranks in skill cannot exceed level
-			temp2 = rand(0..3) until temp != temp2
-			skills[temp2] += 1
-			@deception += skills[0]
-			@perception += skills[1]
-			@sleight_o_hand += skills[2]
-			@stealth = skills[3]
 		elsif @c_class.name == "Sorcerer" || "Warlock" || "Wizard"
-			#favoured skill is knowledge arcana 
-			#other knowledge skills come next
-			@arcana += 1
-			skills = [0,0,0,0]
-			temp = rand(0..3)
-			skills[temp] += 1
-			#ranks in skill cannot exceed level
-			temp2 = rand(0..3) until temp != temp2
-			skills[temp2] += 1
-			@history += skills[0]
-			@medicine += skills[1]
-			@nature += skills[2]
-			@religion += skills[3]
 		end #end if class
 		#level up to chosen level
 		for i in 2..@lvl do level_up(i) end
@@ -596,24 +488,6 @@ class CharactersController < ApplicationController
 			@wis = stat[2]
 			@cha = stat[3]
 		end #end if class
-		@acrobatics = 0
-		@arcana = 0
-		@animal_h = 0
-		@athletics = 0
-		@deception = 0
-		@history = 0
-		@insight = 0
-		@intimidation = 0
-		@investigation = 0
-		@medicine = 0
-		@nature = 0
-		@perception = 0
-		@performance = 0
-		@persuasion = 0
-		@religion = 0
-		@sleight_o_hand = 0
-		@stealth = 0
-		@survival = 0
 		stat #return statement
 	end #end modify by class
 
@@ -652,10 +526,6 @@ class CharactersController < ApplicationController
 			@weight = rand(100..145)			
 		end #end if race
 	end #end modify_by_race
-
-	def modify_skills
-
-	end #end modify skills
 
 	#generates all the data for the preview page
 	def preview
