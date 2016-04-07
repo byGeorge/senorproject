@@ -559,6 +559,21 @@ class CharactersController < ApplicationController
 	end
 
 	def save
-		
+		Character.create do |c|
+			c.userid = @user.id
+			c.name = @name
+			c.level = @lvl
+			c.race = @race.id
+			c.strength = @str
+			c.dexterity = @dex
+			c.constitution = @con
+			c.intelligence = @int
+			c.wisdom = @wis
+			c.charisma = @cha
+			c.cclass = @c_class.id
+			c.spells_list = @spells_list
+			c.hit_points = @hp
+			c.quirks = @appearance
+			c.height_weight_age = @height + " " + @weight + " " + @age
 	end
 end
