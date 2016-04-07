@@ -596,11 +596,17 @@ class CharactersController < ApplicationController
 		#we don't need to store all that crap in the cookie anymore, just need the id now
 		session[:character] = @npc.id
 	end
+
 	def index
 		current_npc = Character.find_by_id(session[:character])
 	end
 
 	def update
 		session[:character] = @character.id
+	end
+
+	#will show data for selected npc
+	def view
+
 	end
 end

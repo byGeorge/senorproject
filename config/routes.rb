@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   	collection do
   		get 'preview'
       get 'save'
+      get 'view'
   	end
   end 
 end
