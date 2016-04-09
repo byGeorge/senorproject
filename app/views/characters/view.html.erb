@@ -10,7 +10,7 @@
 	</div><!-- end div header -->
 	<% if session[:user] && session[:character] == nil %>
 		<% @list = Character.select {|npc| npc.userid == session[:user]} %>
-		<% if @list %>
+		<% if @list.any? %>
 			<div class="form">
 					<%= form_tag({controller: "characters", action: "view"}, method: "get") do %>
 						<label for="NPC">NPC</label>: 
@@ -23,7 +23,9 @@
 						<%= submit_tag("View NPC") %>
 					<% end %>
 				</div><!-- end div form -->
-		<% end %><!-- end if user -->
+		<% else %>
+			<p>You have no characters saved</p>
+		<% end %><!-- end if list -->
 	<% elsif session[:user] && session[:character] %>
 		<div class="column_box">
 			<div class="column_third">
@@ -108,15 +110,13 @@
 				CHA <%= @npc.charisma %>
 			</div>
 		</div><!-- end div abilities_box -->
-	<% else %>
-		<p>You have no characters saved</p>
-	<% end %><!-- end if listed -->
+	<% end %><!-- end if npc -->
 
 	<div id="footer">
 		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open-source font that makes reading easier for dyslexic people.</p>
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
-			<a href='/characters/new'><button>Create a character</button></a>
+			<a href='/characters/new'><button>Create an NPC</button></a>
 			<% if session[:user] %>
 				<a href="/characters/view"><button>View your NPCs</button></a>
 				<a href='/login/logout'><button>Log out</button></a>
