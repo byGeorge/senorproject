@@ -14,7 +14,7 @@
 						<label for="NPC">NPC</label>: 
 						<p>
 							<% @list.each do |npc| %>
-								<%= radio_button("npc", :c, "view") %> Name: <%= npc.name %>, Level <%= npc.level %> 
+								<%= radio_button(:npc, npc.id, :id) %> Name: <%= npc.name %>, Level <%= npc.level %> 
 								<%= Race.find_by_id(npc.race).name %> <%= CClass.find_by_id(npc.cclass).name %>
 							<% end %>
 						</p>
@@ -26,7 +26,7 @@
 		<p>You have no characters saved</p>
 	<% end %><!-- end if listed -->
 	<div id="footer">
-		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open source font that makes reading easier for dyslexic people.</p>
+		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open-source font that makes reading easier for dyslexic people.</p>
 		<p>
 			<a href='/welcome/index'><button>Home</button></a>
 			<a href='/characters/new'><button>Create a character</button></a>

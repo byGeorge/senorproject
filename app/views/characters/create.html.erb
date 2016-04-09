@@ -1,0 +1,19 @@
+<div id="everything">
+	<div id="header">
+		<h1>NPC creation successful</h1>
+	</div><!-- end div header -->
+	<div id="footer">
+		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open-source font that makes reading easier for dyslexic people.</p>
+		<p>
+			<a href='/welcome/index'><button>Home</button></a>
+			<a href='/characters/new'><button>Create a character</button></a>
+			<% if session[:user] %>
+				<a href="/characters/view"><button>View your NPCs</button></a>
+				<a href='/login/logout'><button>Log out</button></a>
+			<% else %>
+				<a href='/login'><button>Log in</button></a>
+				<a href='/login/new'><button>New User</button></a>
+			<% end %>
+		</p>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->

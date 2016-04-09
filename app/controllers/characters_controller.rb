@@ -557,8 +557,8 @@ class CharactersController < ApplicationController
 			@int.to_s + "|" +@wis.to_s + "|" + @cha.to_s + "|" + 
 			@c_class.id.to_s + "|" + @hp.to_s + "|" + @appearance + "|" +
 			@height.to_s + " " + @weight.to_s + " " + @age.to_s + "|"
-		@spells_list.each do |spell|
-			char_temp = char_temp + "," + spell.id.to_s
+		if @spells_list
+			char_temp = char_temp + @spells_list.select { |spell| spell.id }.map(&:id).join(',')
 		end
 		#putting string into cooookie
 		session[:character] = char_temp
@@ -569,9 +569,8 @@ class CharactersController < ApplicationController
 		obj == "Random" || obj == nil
 	end
 
-	#saves data to Character
+	#saves data to character
 	def create
-		binding.pry
 		#retrieves data from cookie (om nom nom)
 		char_temp = session[:character].split('|').reverse!
 		@npc = Character.create do |c|
@@ -589,12 +588,10 @@ class CharactersController < ApplicationController
 			c.hit_points = char_temp.pop
 			c.quirks = char_temp.pop
 			c.height_weight_age = char_temp.pop
-			spells_list = Array.new
-			spells_list.push(char_temp.each)
-			c.spells_list = spells_list
+			c.spells_list = char_temp.pop unless c.cclass == 1 #unless it's a barbarian
 		end
-		#we don't need to store all that crap in the cookie anymore, just need the id now
-		session[:character] = @npc.id
+		#we don't need to store all that crap in the cookie anymore
+		session[:character] = nil
 	end
 
 	def index
@@ -607,6 +604,194 @@ class CharactersController < ApplicationController
 
 	#will show data for selected npc
 	def view
+		session[:character] = params[:npc]
+		@npc = Character.find_by_id(session[:character])
+		if params[:npc] != nil
+			@wpn_prof = 2 + (@npc.level - 1)/4
+			if @npc.cclass == 1 #barbarian
+				if @npc.level <= 2
+					@rage = 2
+				elsif @npc.level > 2 && @npc.level <= 5
+					@rage = 3
+				elsif @npc.level > 5 && @npc.level <= 11
+					@rage = 4
+				elsif @npc.level > 11 && @npc.level <= 16
+					@rage = 5
+				elsif @npc.level > 16 && @npc.level <= 19
+					@rage = 6
+				else
+					@rage = "unlimited"
+				end
 
-	end
-end
+				if @npc.level <= 8
+					@rage_dmg = 2
+				elsif @npc.level > 8 && @npc.level <= 15
+					@rage_dmg = 3
+				else
+					@rage_dmg = 4
+				end
+			elsif @npc.cclass > 1 && @npc.cclass <= 4 #if this is a class with spells
+				@spells_list = @npc.spell_list.split(',')
+				if @npc.cclass == 2 #bard
+					@spells_known = 4
+					@spells_known += 1 if @npc.level < 10 || @npc.level == 11 || @npc.level == 13 || @npc.level == 15 || @npc.level == 17
+					@spells_known += 2 if @npc.level == 10 || @npc.level == 14 || @npc.level == 18
+				end
+
+				@spells = [0,0,0, 0,0,0, 0,0,0]
+				if @npc.level == 1
+					@spells[0] = 2
+					@spells[1] = 2
+				elsif @npc.level == 2
+					@spells[0] = 2
+					@spells[1] = 3
+				elsif @npc.level == 3
+					@spells[0] = 2
+					@spells[1] = 4
+					@spells[2] = 2
+				elsif @npc.level == 4
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+				elsif @npc.level == 5
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 2
+				elsif @npc.level == 6
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3
+				elsif @npc.level == 7
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 1
+				elsif @npc.level == 8
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 2
+				elsif @npc.level == 9
+					@spells[0] = 3
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 1
+				elsif @npc.level == 10
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2
+				elsif @npc.level == 11
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1
+				elsif @npc.level == 12
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+				elsif @npc.level == 13
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+					@spells[7] = 1
+				elsif @npc.level == 14
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+					@spells[7] = 1
+				elsif @npc.level == 15
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+					@spells[7] = 1					
+					@spells[8] = 1
+				elsif @npc.level == 16
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+					@spells[7] = 1					
+					@spells[8] = 1
+				elsif @npc.level == 17
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 2					
+					@spells[6] = 1					
+					@spells[7] = 1					
+					@spells[8] = 1
+					@spells[9] = 1
+				elsif @npc.level == 18
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 3					
+					@spells[6] = 1					
+					@spells[7] = 1					
+					@spells[8] = 1
+					@spells[9] = 1
+				elsif @npc.level == 19
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 3					
+					@spells[6] = 2
+					@spells[7] = 1					
+					@spells[8] = 1
+					@spells[9] = 1
+				elsif @npc.level == 20
+					@spells[0] = 4
+					@spells[1] = 4
+					@spells[2] = 3
+					@spells[3] = 3					
+					@spells[4] = 3
+					@spells[5] = 3					
+					@spells[6] = 2
+					@spells[7] = 2
+					@spells[8] = 1
+					@spells[9] = 1
+				end # end if level
+				if @npc.cclass == 3 # if cleric
+					@spells[0] += 1
+				end
+			end # end if caster class
+		end #end if npc
+	end #end view
+end #end characters_controller

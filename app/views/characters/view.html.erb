@@ -1,3 +1,129 @@
-<h1> Your characters </h1>
-<p> You have no character! <a href="/form">Make one</a>,
- <a href="/login">log in</a>, or <a href="welcome/index">go home</a>.</p>
+<div id="everything">
+	<div id="header">
+		<% if session[:user] && session[:character] == nil %>
+			<h1> <%= User.find_by_id(session[:user]).name %>'s NPCs</h1>
+		<% elsif session[:user] %>
+			<h1> <%= Character.find_by_id(session[:character]).name %>
+		<% else %>
+			<h1> You are not logged in </h1>
+		<% end %>
+	</div><!-- end div header -->
+	<% if session[:user] && session[:character] != nil %>
+		<% @list = Character.select {|npc| npc.userid == session[:user]} %>
+		<% if @list %>
+			<div class="form">
+					<%= form_tag({controller: "characters", action: "view"}, method: "get") do %>
+						<label for="NPC">NPC</label>: 
+						<% @list.each do |npc| %>
+							<p>
+								<%= radio_button_tag(:npc, npc.id) %> Name: <%= npc.name %>, Level <%= npc.level %> 
+								<%= Race.find_by_id(npc.race).name %> <%= CClass.find_by_id(npc.cclass).name %>
+							</p>
+						<% end %>
+						<%= submit_tag("View NPC") %>
+					<% end %>
+				</div><!-- end div form -->
+		<% end %><!-- end if user -->
+	<% elsif session[:user] && session[:character] %>
+		<div class="column_box">
+			<div class="column_third">
+				<h3>Skills: </h3>
+				<dl>
+					<dt>Acrobatics:</dt><dd><%= (@npc.dexterity-10)/2 %></dd>
+					<dt>Animal Handling:</dt><dd><%= (@npc.wisdom-10)/2 %></dd>
+					<dt>Arcana:</dt><dd><%= (@npc.intelligence-10)/2 %></dd>
+					<dt>Athletics:</dt><dd><%= (@npc.strength-10)/2 %></dd>
+					<dt>Deception:</dt><dd><%= (@npc.charisma-10)/2 %></dd>
+					<dt>History:</dt><dd><%= (@npc.intelligence-10)/2 %></dd>
+					<dt>Insight:</dt><dd><%= (@npc.wisdom-10)/2 %></dd>
+					<dt>Intimidation:</dt><dd><%= (@npc.charisma-10)/2 %></dd>
+					<dt>Investigation:</dt><dd><%= (@npc.intelligence-10)/2 %></dd>
+					<dt>Medicine:</dt><dd><%= (@npc.wisdom-10)/2 %></dd>
+					<dt>Nature:</dt><dd><%= (@npc.intelligence-10)/2 %></dd>
+					<dt>Perception:</dt><dd><%= (@npc.wisdom-10)/2 %></dd>
+					<dt>Performance:</dt><dd><%= (@npc.charisma-10)/2 %></dd>
+					<dt>Persuasion:</dt><dd><%= (@npc.charisma-10)/2 %></dd>
+					<dt>Religion:</dt><dd><%= (@npc.intelligence-10)/2 %></dd>
+					<dt>Sleight of Hand:</dt><dd><%= (@npc.dexterity-10)/2 %></dd>
+					<dt>Stealth:</dt><dd><%= (@npc.dexterity-10)/2 %></dd>
+					<dt>Survival:</dt><dd><%= (@npc.wisdom-10)/2 %></dd>
+				</dl>
+			</div><!-- end div column_third (skills) -->
+			<div class="column_third">
+				<h4>Hit points: <%= @npc.hit_points %></h4>
+				<h5>Weapon Proficiency <%= @wpn_prof %></h5>
+				<% if @npc.cclass == 1 %>
+					<h4>Rages: <%= @rage %></h4>
+					<h5>Rage Damage Bonus: <%= @rage_dmg %></h5>
+				<% elsif @npc.cclass == 2 || @npc.cclass == 3 || @npc.cclass == 4 %>
+					<% if @npc.cclass == 2 %>
+						<h4>Total spells known: <%= @spells_known %></h4>
+					<% end %>
+					<dl>
+						<dt>Cantrips: <%= @spells[0] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 0 }.map(&:spell).join(', ') %></dd>
+						<dt>1st Level Spells: <%= @spells[1] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 1 }.map(&:spell).join(', ') %></dd>
+						<dt>2nd Level Spells: <%= @spells[2] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 2 }.map(&:spell).join(', ') %></dd>	
+						<dt>3rd Level Spells: <%= @spells[3] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 3 }.map(&:spell).join(', ') %></dd>
+						<dt>4th Level Spells: <%= @spells[4] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 4 }.map(&:spell).join(', ') %></dd>
+						<dt>5th Level Spells: <%= @spells[5] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 5 }.map(&:spell).join(', ') %></dd>
+						<dt>6th Level Spells: <%= @spells[6] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 6 }.map(&:spell).join(', ') %></dd>
+						<dt>7th Level Spells: <%= @spells[7] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 7 }.map(&:spell).join(', ') %></dd>
+						<dt>8th Level Spells: <%= @spells[8] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 8 }.map(&:spell).join(', ') %></dd>
+						<dt>9th Level Spells: <%= @spells[9] %></dt>
+						<dd><%= @spells_list.select {|spell| Spell.find_by_id(spell).lvl == 9 }.map(&:spell).join(', ') %></dd>
+					</dl>
+				<% end %><!-- end if class -->
+			</div><!-- end div column_third (combat) -->
+			<div class="column_third">
+				<p>Height: <%= @npc.height_weight_age %></p>
+				<p>Quirks: <%= @npc.quirks %></p>
+			</div><!-- end div column_third (appearances) -->
+		</div><!-- end div column_box -->
+		<div class="abilities_box">
+			<div class="ability">
+				STR <%= @npc.strength %>
+			</div>
+			<div class="ability">
+				DEX <%= @npc.dexterity %>
+			</div>
+			<div class="ability">
+				CON <%= @npc.constitution %>
+			</div>
+			<div class="ability">
+				INT <%= @npc.intelligence %>
+			</div>
+			<div class="ability">
+				WIS <%= @npc.wisdom %>
+			</div>
+			<div class="ability">
+				CHA <%= @npc.charisma %>
+			</div>
+		</div><!-- end div abilities_box -->
+	<% else %>
+		<p>You have no characters saved</p>
+	<% end %><!-- end if listed -->
+	<% binding.pry %>
+	<div id="footer">
+		<p> The font used on this page, <a href='http://opendyslexic.org/'>OpenDyslexic</a>, is an open-source font that makes reading easier for dyslexic people.</p>
+		<p>
+			<a href='/welcome/index'><button>Home</button></a>
+			<a href='/characters/new'><button>Create a character</button></a>
+			<% if session[:user] %>
+				<a href="/characters/view"><button>View your NPCs</button></a>
+				<a href='/login/logout'><button>Log out</button></a>
+			<% else %>
+				<a href='/login'><button>Log in</button></a>
+				<a href='/login/new'><button>New User</button></a>
+			<% end %>
+		</p>
+	</div><!-- end div footer -->
+</div><!-- end div everything -->
