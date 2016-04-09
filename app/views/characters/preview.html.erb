@@ -86,13 +86,13 @@
 			CHA <%= @cha %>
 		</div>
 	</div><!-- end div abilities_box -->
-	<div class="center">
+	<div class="centered">
 		<p>
 			<% if session[:user] %>
 				<%= button_to "Save this NPC", {controller: "characters", action: "create"}, method: "get" %>				
 			<% end %>
 			<a href='/characters/new'><button>Create another NPC</button></a>
-			<a href="/print"><button>Print this NPC</button></a>
+			<a href="#" onclick="window.print();return false;"><button>Print this NPC</button></a>
 		</p>
 	</div><!-- end div center -->
 	<div id="footer">
