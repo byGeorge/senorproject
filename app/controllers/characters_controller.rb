@@ -60,7 +60,7 @@ class CharactersController < ApplicationController
 			#picks random spells
 			@spells_list = Array.new
 			2.times { Spell.pick_spell(0, @spells_list, "Druid") } 
-			Spell.pick_spell(1, @spells_list, "Bard")
+			Spell.pick_spell(1, @spells_list, "Druid")
 		# The following will not be used for some time, but will be added after project is presented
 		elsif @c_class.name == "Fighter"
 		elsif @c_class.name == "Monk"
@@ -556,7 +556,7 @@ class CharactersController < ApplicationController
 			@str.to_s + "|" + @dex.to_s + "|" + @con.to_s + "|" + 
 			@int.to_s + "|" +@wis.to_s + "|" + @cha.to_s + "|" + 
 			@c_class.id.to_s + "|" + @hp.to_s + "|" + @appearance + "|" +
-			@height.to_s + " " + @weight.to_s + " " + @age.to_s + "|"
+			@height.to_s + " tall, " + @weight.to_s + " pounds, " + @age.to_s + " years old|"
 		if @spells_list
 			char_temp = char_temp + @spells_list.select { |spell| spell.id }.map(&:id).join(',')
 		end

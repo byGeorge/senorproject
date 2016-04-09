@@ -17,7 +17,7 @@ class Spell < ActiveRecord::Base
 				if list == nil
 					list.push(temp)
 				else
-					temp =  Spell.all.sample until (temp.cclass.to_s.include?(c_class) && temp.level == 0)
+					temp =  Spell.all.sample until (!list.include?(temp) && temp.level == 0)
 					list.push(temp)
 				end
 			else

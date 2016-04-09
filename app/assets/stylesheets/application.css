@@ -57,12 +57,18 @@ body {
 	margin-right: 4rem;
 }
 
-.inline {
-	dt {
-		float: left;
-		clear: left;
-		width: 10rem;
-	}
+.inline dd { 
+	float: right;
+	margin-right: 4rem;
+	margin-left: 3rem;
+	border-style: inset;
+	width: 4rem;
+	text-align: center;
+}
+
+.inline dt {  
+	float: left;
+	clear: both;  
 }
 
 .centered {

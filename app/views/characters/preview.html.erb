@@ -1,35 +1,37 @@
 <div id="everything">
 	<div id="header">
 		<h1><%= @name %> </h1>
-		<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %>, age <%= @age %></p>
+		<p>Level <%= @lvl %> <%= @race.name %> <%= @c_class.name %></p>
 	</div>
 	<div class="column_box">
 		<div class="column_third">
 			<h3>Skills: </h3>
-			<dl>
-				<dt>Acrobatics:</dt><dd><%= (@dex-10)/2 %></dd>
-				<dt>Animal Handling:</dt><dd><%= (@wis-10)/2 %></dd>
-				<dt>Arcana:</dt><dd><%= (@int-10)/2 %></dd>
-				<dt>Athletics:</dt><dd><%= (@str-10)/2 %></dd>
-				<dt>Deception:</dt><dd><%= (@cha-10)/2 %></dd>
-				<dt>History:</dt><dd><%= (@int-10)/2 %></dd>
-				<dt>Insight:</dt><dd><%= (@wis-10)/2 %></dd>
-				<dt>Intimidation:</dt><dd><%= (@cha-10)/2 %></dd>
-				<dt>Investigation:</dt><dd><%= (@int-10)/2 %></dd>
-				<dt>Medicine:</dt><dd><%= (@wis-10)/2 %></dd>
-				<dt>Nature:</dt><dd><%= (@int-10)/2 %></dd>
-				<dt>Perception:</dt><dd><%= (@wis-10)/2 %></dd>
-				<dt>Performance:</dt><dd><%= (@cha-10)/2 %></dd>
-				<dt>Persuasion:</dt><dd><%= (@cha-10)/2 %></dd>
-				<dt>Religion:</dt><dd><%= (@int-10)/2 %></dd>
-				<dt>Sleight of Hand:</dt><dd><%= (@dex-10)/2 %></dd>
-				<dt>Stealth:</dt><dd><%= (@dex-10)/2 %></dd>
-				<dt>Survival:</dt><dd><%= (@wis-10)/2 %></dd>
-			</dl>
+			<div class="inline">
+				<dl>
+					<dt>Acrobatics:</dt><dd><%= (@dex-10)/2 %></dd>
+					<dt>Animal Handling:</dt><dd><%= (@wis-10)/2 %></dd>
+					<dt>Arcana:</dt><dd><%= (@int-10)/2 %></dd>
+					<dt>Athletics:</dt><dd><%= (@str-10)/2 %></dd>
+					<dt>Deception:</dt><dd><%= (@cha-10)/2 %></dd>
+					<dt>History:</dt><dd><%= (@int-10)/2 %></dd>
+					<dt>Insight:</dt><dd><%= (@wis-10)/2 %></dd>
+					<dt>Intimidation:</dt><dd><%= (@cha-10)/2 %></dd>
+					<dt>Investigation:</dt><dd><%= (@int-10)/2 %></dd>
+					<dt>Medicine:</dt><dd><%= (@wis-10)/2 %></dd>
+					<dt>Nature:</dt><dd><%= (@int-10)/2 %></dd>
+					<dt>Perception:</dt><dd><%= (@wis-10)/2 %></dd>
+					<dt>Performance:</dt><dd><%= (@cha-10)/2 %></dd>
+					<dt>Persuasion:</dt><dd><%= (@cha-10)/2 %></dd>
+					<dt>Religion:</dt><dd><%= (@int-10)/2 %></dd>
+					<dt>Sleight of Hand:</dt><dd><%= (@dex-10)/2 %></dd>
+					<dt>Stealth:</dt><dd><%= (@dex-10)/2 %></dd>
+					<dt>Survival:</dt><dd><%= (@wis-10)/2 %></dd>
+				</dl>
+			</div><!-- end div inline -->
 		</div><!-- end div column_third (skills) -->
 		<div class="column_third">
 			<h4>Hit points: <%= @hp %></h4>
-			<h5>Weapon Proficiency <%= @wpn_prof %></h5>
+			<h5>Proficiency Bonus: <%= @wpn_prof %></h5>
 			<% if @c_class.name == "Barbarian" %>
 				<h4>Rages: <%= @rage %></h4>
 				<h5>Rage Damage Bonus: <%= @rage_dmg %></h5>
@@ -39,30 +41,30 @@
 				<% end %>
 				<dl>
 					<dt>Cantrips: <%= @spells[0] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 0 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 0 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>1st Level Spells: <%= @spells[1] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 1 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 1 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>2nd Level Spells: <%= @spells[2] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 2 }.map(&:spell).join(', ') %></dd>	
+					<dd><%= @spells_list.select {|spell| spell.level == 2 }.map(&:spell).sort!.join(', ') %></dd>	
 					<dt>3rd Level Spells: <%= @spells[3] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 3 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 3 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>4th Level Spells: <%= @spells[4] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 4 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 4 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>5th Level Spells: <%= @spells[5] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 5 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 5 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>6th Level Spells: <%= @spells[6] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 6 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 6 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>7th Level Spells: <%= @spells[7] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 7 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 7 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>8th Level Spells: <%= @spells[8] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 8 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 8 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>9th Level Spells: <%= @spells[9] %></dt>
-					<dd><%= @spells_list.select {|spell| spell.level == 9 }.map(&:spell).join(', ') %></dd>
+					<dd><%= @spells_list.select {|spell| spell.level == 9 }.map(&:spell).sort!.join(', ') %></dd>
 				</dl>
 			<% end %>
 		</div><!-- end div column_third (combat) -->
 		<div class="column_third">
-			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds</p>
+			<p>Height: <%= @height %>, Weight: <%= @weight %> pounds, age <%= @age %></p>
 			<p>Quirks: <%= @appearance %></p>
 		</div><!-- end div column_third (appearances) -->
 	</div><!-- end div column_box -->
