@@ -631,14 +631,19 @@ class CharactersController < ApplicationController
 					@rage_dmg = 4
 				end
 			elsif @npc.cclass > 1 && @npc.cclass <= 4 #if this is a class with spells
-				@spells_list = @npc.spell_list.split(',')
+				slist = @npc.spells_list.split(',')
+				@spells_list = Array.new
+				slist.each do |spell| 
+					add = Spell.find_by_id(spell)
+					@spells_list.push(add)
+				end
 				if @npc.cclass == 2 #bard
 					@spells_known = 4
 					@spells_known += 1 if @npc.level < 10 || @npc.level == 11 || @npc.level == 13 || @npc.level == 15 || @npc.level == 17
 					@spells_known += 2 if @npc.level == 10 || @npc.level == 14 || @npc.level == 18
 				end
 
-				@spells = [0,0,0, 0,0,0, 0,0,0]
+				@spells = [0,0,0, 0,0,0, 0,0,0, 0]
 				if @npc.level == 1
 					@spells[0] = 2
 					@spells[1] = 2
@@ -788,6 +793,8 @@ class CharactersController < ApplicationController
 					@spells[8] = 1
 					@spells[9] = 1
 				end # end if level
+
+				#clerics are special snowflakes, and get one more cantrip than everyone else
 				if @npc.cclass == 3 # if cleric
 					@spells[0] += 1
 				end
