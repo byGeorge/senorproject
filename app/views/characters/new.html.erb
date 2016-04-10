@@ -9,6 +9,8 @@
 				<%= collection_select(:race, :race_id, Race.all, :id, :name, {prompt: "Random"}) %>
 			</p>
 			<p>
+				<!-- I mean... sure you can pick the gender, but it won't be on the character sheet. 
+				it just affects the name, except for elves -->
 				<label for="gender">Gender</label>: 
 				<%= check_box_tag(:m) %>
 				<%= label_tag(:m, "Male") %>

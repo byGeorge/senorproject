@@ -1,4 +1,6 @@
 class LoginController < ApplicationController
+
+	#logs in a user if the username can be found
 	def logged
 		@login_token = 0
 		usr = params[:username]

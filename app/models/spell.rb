@@ -4,6 +4,8 @@ class Spell < ActiveRecord::Base
 		#if the classes have a spell list
 		if (c_class == "Bard")
 		temp = Spell.all.sample
+			#if list hasn't been initialized initialize it. Otherwise, just push it on. 
+			#Makes sure it's the right level, class, and isn't duplicated.
 			if list == nil
 				temp =  Spell.all.sample until (temp.cclass.to_s.include?(c_class) && temp.level == level)
 			else

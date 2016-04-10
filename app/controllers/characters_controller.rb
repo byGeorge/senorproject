@@ -238,7 +238,7 @@ class CharactersController < ApplicationController
 				@spells[7] += 1
 			end # end if level
 		elsif @c_class.name == "Druid"
-			#clerics know all of the spells available to their class
+			#druids know all of the spells available to their class
 			if lvl == 2
 				#add to the number of spells cast per day
 				@spells[1] += 1
@@ -497,6 +497,7 @@ class CharactersController < ApplicationController
 	def modify_by_race
 		if (@race.name == "Human")
 			@name = HumanName.choosename(@m, @f, @n)
+			#add racial bonuses
 			@str += 1
 			@dex += 1
 			@con += 1
@@ -532,6 +533,7 @@ class CharactersController < ApplicationController
 		#getting params from form entries
 		race_id_temp = params[:race][:race_id].to_i
 		c_class_id_temp = params[:c_class][:class_id].to_i
+		#m f and n only affect names and are not printed on the sheet
 		@m = params[:m]
 		@f = params[:f]
 		@n = params[:n]
@@ -547,6 +549,8 @@ class CharactersController < ApplicationController
 		end
 		@lvl = params[:lvl].to_i
 		@lvl = rand(1..20) if params[:lvl] == ""
+
+		# modify stats by class and race
 		modify_by_class(generate_abilities(@lvl))
 		modify_by_race
 		generate_skills(@lvl)
@@ -573,6 +577,7 @@ class CharactersController < ApplicationController
 	def create
 		#retrieves data from cookie (om nom nom)
 		char_temp = session[:character].split('|').reverse!
+		#this is the saving part of saving the data to the character
 		@npc = Character.create do |c|
 			c.userid = session[:user]
 			c.name = char_temp.pop
@@ -594,20 +599,30 @@ class CharactersController < ApplicationController
 		session[:character] = nil
 	end
 
+	#I don't think I actually ever use this, but it throws an exception if this isn't present
 	def index
 		current_npc = Character.find_by_id(session[:character])
 	end
 
+	#I don't think I actually ever use this, but it throws an exception if this isn't present
 	def update
 		session[:character] = @character.id
 	end
 
 	#will show data for selected npc
 	def view
+		#save the form result into the cookie as character data
 		session[:character] = params[:npc]
+
+		#finds character in the database
 		@npc = Character.find_by_id(session[:character])
+
+		#if there is a selected character, parse the relevant data to show on form
 		if params[:npc] != nil
+			#calculate proficiency bonus
 			@wpn_prof = 2 + (@npc.level - 1)/4
+
+			#special class things like rage/spells/etc
 			if @npc.cclass == 1 #barbarian
 				if @npc.level <= 2
 					@rage = 2

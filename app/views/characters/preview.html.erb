@@ -8,6 +8,7 @@
 			<h3>Skills: </h3>
 			<div class="inline">
 				<dl>
+					<!-- Display skills -->
 					<dt>Acrobatics:</dt><dd><%= (@dex-10)/2 %></dd>
 					<dt>Animal Handling:</dt><dd><%= (@wis-10)/2 %></dd>
 					<dt>Arcana:</dt><dd><%= (@int-10)/2 %></dd>
@@ -40,6 +41,7 @@
 					<h4>Total spells known: <%= @spells_known %></h4>
 				<% end %>
 				<dl>
+					<!-- Display spell list -->
 					<dt>Cantrips: <%= @spells[0] %></dt>
 					<dd><%= @spells_list.select {|spell| spell.level == 0 }.map(&:spell).sort!.join(', ') %></dd>
 					<dt>1st Level Spells: <%= @spells[1] %></dt>

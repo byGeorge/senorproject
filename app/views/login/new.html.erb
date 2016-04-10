@@ -1,23 +1,23 @@
 <div id="everything">
 	<div id="header">
-		<% if @login_token == 1 %>
+		<% if @login_token == 1 %><!-- if user is logged in -->
 			<h1> User creation successful! </h1>
-		<% else %>
+		<% else %> <!-- else try to create a new user -->
 			<h1> Please choose a user name and password </h1>
 		<% end %>
 	</div><!-- end div header -->
-	<% if @login_token == 0 || @login_token == nil %>
-		<div class="form">
+	<% if @login_token == 0 || @login_token == nil %><!-- if user is not logged in -->
+		<div class="form"><!-- form for login-->
 				<%= form_tag({controller: "login", action: "new"}, method: "get") do %>
 			<p>
-				<% if @messageu %>
+				<% if @messageu %><!-- print message about username, if there are any -->
 					<%= @messageu %></p><p>
 				<% end %>
 				<%= label_tag(:usr, "User Name:") %>
 				<%= text_field_tag(:usr) %>
 			</p>
 			<p>
-				<% if @messagep %>
+				<% if @messagep %><!-- print message about password, if there are any -->
 					<%= @messagep %></p><p>
 				<% end %>
 				<%= label_tag(:pwd, "Password:") %>

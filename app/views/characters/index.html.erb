@@ -10,19 +10,21 @@
 		<% @list = Character.select {|npc| npc.userid == session[:user]} %>
 		<% if @list %>
 			<div class="form">
-					<%= form_tag({controller: "characters", action: "view"}, method: "get") do %>
-						<label for="NPC">NPC</label>: 
-						<p>
-							<% @list.each do |npc| %>
-								<%= radio_button(:npc, npc.id, :id) %> Name: <%= npc.name %>, Level <%= npc.level %> 
-								<%= Race.find_by_id(npc.race).name %> <%= CClass.find_by_id(npc.cclass).name %>
-							<% end %>
-						</p>
-						<%= submit_tag("View NPC") %>
-					<% end %>
-				</div><!-- end div form -->
+				<!-- lists npcs -->
+				<%= form_tag({controller: "characters", action: "view"}, method: "get") do %>
+					<label for="NPC">NPC</label>: 
+					<p>
+						<% @list.each do |npc| %>
+							<%= radio_button(:npc, npc.id, :id) %> Name: <%= npc.name %>, Level <%= npc.level %> 
+							<%= Race.find_by_id(npc.race).name %> <%= CClass.find_by_id(npc.cclass).name %>
+						<% end %>
+					</p>
+					<%= submit_tag("View NPC") %>
+				<% end %>
+			</div><!-- end div form -->
 		<% end %><!-- end if user -->
 	<% else %>
+		<!-- prints if the user does not have any npcs -->
 		<p>You have no characters saved</p>
 	<% end %><!-- end if listed -->
 	<div id="footer">
